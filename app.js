@@ -3,6 +3,11 @@ let translations = null;
 let language = "en";
 let activeFilter = "All";
 
+const motionLink = document.createElement("link");
+motionLink.rel = "stylesheet";
+motionLink.href = "motion.css?v=20260914-1";
+document.head.appendChild(motionLink);
+
 const CATEGORY_LABELS_VI = {
   Psychology: "Tâm lý",
   Travel: "Du lịch",
