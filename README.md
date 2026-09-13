@@ -4,7 +4,7 @@ A responsive, bilingual portfolio built as a lightweight static site. It uses of
 
 ## Edit without code (Pages CMS)
 
-1. Open [Pages CMS](https://app.pagescms.org) and sign in with GitHub.
+1. Open the site's [admin shortcut](https://thanhtamphann.github.io/thanhtamphan-portfolio/admin/) and sign in to Pages CMS with GitHub.
 2. Give Pages CMS access to this repository and select `thanhtamphann/thanhtamphan-portfolio`.
 3. Open **Video, số liệu & liên hệ** to edit projects, thumbnails, metrics, skills, process, tags, email, and social links.
 4. Open **Toàn bộ chữ trên trang** to edit all English and Vietnamese page copy.
