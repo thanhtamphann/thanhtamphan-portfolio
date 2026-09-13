@@ -3,6 +3,9 @@ let translations = null;
 let language = "en";
 let activeFilter = "All";
 
+const WORK_EMAIL = "thanhtamphannforwork@gmail.com";
+const TELEGRAM_HANDLE = "thanhtamphann";
+
 function t(key) {
   return translations?.[language]?.[key] || key;
 }
@@ -100,20 +103,25 @@ function renderTags() {
 }
 
 function renderPortrait() {
-  const portrait = document.querySelector("#about-portrait");
-  if (data.profile?.image) {
-    portrait.innerHTML = `<img src="${data.profile.image}" alt="${data.profile.alt || "Thanh Tam Phan"}" loading="lazy" />`;
-    portrait.classList.add("has-image");
-    return;
-  }
-  portrait.innerHTML = "<span>TTP</span>";
-  portrait.classList.remove("has-image");
+  const portraits = [document.querySelector("#hero-photo"), document.querySelector("#about-portrait")].filter(Boolean);
+  const alt = data.profile?.alt || "Thanh Tam Phan";
+
+  portraits.forEach((portrait) => {
+    if (data.profile?.image) {
+      portrait.innerHTML = `<img src="${data.profile.image}" alt="${alt}" loading="lazy" />`;
+      portrait.classList.add("has-image");
+    } else {
+      portrait.innerHTML = "<span>TTP</span>";
+      portrait.classList.remove("has-image");
+    }
+  });
 }
 
 function renderContact() {
   const links = [];
   if (data.contact.github) links.push({ label: t("github"), url: data.contact.github });
-  if (data.contact.email) links.push({ label: t("email"), url: `mailto:${data.contact.email}` });
+  links.push({ label: "Email", url: `mailto:${WORK_EMAIL}` });
+  links.push({ label: "Telegram", url: `https://t.me/${TELEGRAM_HANDLE}` });
   if (data.contact.linkedin) links.push({ label: t("linkedin"), url: data.contact.linkedin });
   document.querySelector("#contact-links").innerHTML = links.map((link) => `<a class="contact-link" href="${link.url}" target="_blank" rel="noreferrer"><span>${link.label}</span><span>↗</span></a>`).join("");
 }
