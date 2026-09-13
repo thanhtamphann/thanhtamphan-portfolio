@@ -1,0 +1,152 @@
+/* Motion layer: subtle editorial animation for the portfolio */
+
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(42px) skewY(1.5deg); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
+}
+
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: .72; }
+}
+
+@keyframes floatArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes statRise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1.reveal.visible > span,
+.hero h1.reveal.visible > em {
+  display: inline-block;
+  opacity: 0;
+  animation: heroRise .95s cubic-bezier(.2,.75,.25,1) forwards;
+}
+
+.hero h1.reveal.visible > span { animation-delay: .08s; }
+.hero h1.reveal.visible > em { animation-delay: .24s; }
+
+.hero-kicker.visible { transition-delay: .02s; }
+.hero-bottom.visible { transition-delay: .34s; }
+.hero-photo-wrap.visible { transition-delay: .18s; }
+
+.status-dot { animation: softPulse 2.4s ease-in-out infinite; }
+.round-link span { display: inline-block; animation: floatArrow 1.9s ease-in-out infinite; }
+
+.section-heading h2 em {
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading h2 em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.08em;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: .35;
+}
+
+.section-heading.visible h2 em::after {
+  animation: lineGrow .8s .32s cubic-bezier(.2,.75,.25,1) forwards;
+}
+
+.stats.visible .stat {
+  opacity: 0;
+  animation: statRise .65s cubic-bezier(.2,.75,.25,1) forwards;
+}
+.stats.visible .stat:nth-child(1) { animation-delay: .04s; }
+.stats.visible .stat:nth-child(2) { animation-delay: .12s; }
+.stats.visible .stat:nth-child(3) { animation-delay: .20s; }
+.stats.visible .stat:nth-child(4) { animation-delay: .28s; }
+
+.stat-value,
+.project-card h3,
+.expertise-item h3,
+.process-step h3,
+.contact-link,
+.about-tag,
+.filter-btn {
+  transition: transform .28s ease, letter-spacing .28s ease, opacity .28s ease;
+}
+
+.stat:hover .stat-value { transform: translateY(-5px); }
+.project-card:hover h3 { transform: translateX(5px); }
+.expertise-item:hover h3,
+.process-step:hover h3 { transform: translateX(6px); }
+.about-tag:hover { transform: translateY(-3px); }
+.filter-btn:hover { transform: translateY(-2px); }
+.contact-link:hover { transform: translateY(-3px); }
+
+.project-card {
+  transition: transform .42s cubic-bezier(.2,.75,.25,1);
+}
+.project-card:hover { transform: translateY(-7px); }
+
+.project-image::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 28%, rgba(255,255,255,.18) 48%, transparent 68%);
+  transform: translateX(-125%);
+  transition: transform .8s ease;
+  pointer-events: none;
+}
+.project-card:hover .project-image::before { transform: translateX(125%); }
+
+.expertise-item,
+.process-step {
+  transition: padding-left .35s ease, padding-right .35s ease, background-color .35s ease;
+}
+.expertise-item:hover { padding-left: 12px; padding-right: 12px; background: rgba(255,255,255,.025); }
+.process-step:hover { padding-left: 12px; padding-right: 12px; background: rgba(17,17,15,.025); }
+
+.manifesto blockquote.reveal.visible,
+.about-copy.reveal.visible,
+.contact h2.reveal.visible {
+  transition-duration: .9s;
+}
+
+@media (max-width: 780px) {
+  .project-card:hover { transform: none; }
+  .expertise-item:hover,
+  .process-step:hover { padding-left: 0; padding-right: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1.reveal.visible > span,
+  .hero h1.reveal.visible > em,
+  .stats.visible .stat,
+  .status-dot,
+  .round-link span,
+  .section-heading.visible h2 em::after {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .project-card,
+  .stat-value,
+  .project-card h3,
+  .expertise-item h3,
+  .process-step h3,
+  .contact-link,
+  .about-tag,
+  .filter-btn {
+    transition: none !important;
+  }
+}
