@@ -2,20 +2,21 @@
 
 A responsive, bilingual portfolio built as a lightweight static site. It uses official YouTube thumbnails for selected channel work and requires no build tools.
 
-## Edit the portfolio
+## Edit without code (Pages CMS)
 
-Most updates happen in **`portfolio-data.js`**:
+1. Open [Pages CMS](https://app.pagescms.org) and sign in with GitHub.
+2. Give Pages CMS access to this repository and select `thanhtamphann/thanhtamphan-portfolio`.
+3. Open **Video, số liệu & liên hệ** to edit projects, thumbnails, metrics, skills, process, tags, email, and social links.
+4. Open **Toàn bộ chữ trên trang** to edit all English and Vietnamese page copy.
+5. Save. Pages CMS commits the update to `main`, and GitHub Pages republishes the site automatically.
 
-- Change metrics in `stats`
-- Add or remove video cards in `projects`
-- Update services in `expertise`
-- Add your email and LinkedIn URL in `contact`
+For a custom project image, upload it in the **Ảnh tùy chỉnh** field. Leave that field empty to keep using the official YouTube thumbnail automatically.
 
-Main bilingual interface copy is in the `translations` object inside **`app.js`**. Layout lives in **`index.html`**, and visual styling lives in **`styles.css`**.
+The editor is configured by **`.pages.yml`**. Editable content is stored in **`content/portfolio.json`** and **`content/copy.json`**. Layout lives in **`index.html`**, behavior in **`app.js`**, and styling in **`styles.css`**.
 
 ## Preview locally
 
-Open `index.html` directly, or run any static web server in the repository folder.
+Run any static web server in the repository folder. The site now loads editable JSON content with `fetch`, so opening `index.html` directly through `file://` is not supported.
 
 ## Publish with GitHub Pages
 
@@ -26,4 +27,4 @@ Open `index.html` directly, or run any static web server in the repository folde
 
 ## Metrics note
 
-Channel and video figures are public snapshots verified on September 13, 2026 and may change. Update `portfolio-data.js` whenever you want to refresh them.
+Channel and video figures are public snapshots verified on September 13, 2026 and may change. Update them through Pages CMS whenever you want to refresh them.
