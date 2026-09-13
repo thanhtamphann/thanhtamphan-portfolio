@@ -49,11 +49,16 @@ function renderProjects() {
       <article class="project-card reveal visible">
         <a class="project-image" href="https://www.youtube.com/watch?v=${project.videoId}" target="_blank" rel="noreferrer" aria-label="${t("watch")}: ${project.title}">
           <img src="${image}" onerror="this.onerror=null;this.src='${fallback}'" alt="Thumbnail for ${project.title}" loading="lazy" />
-          <span class="view-badge">${project.views}</span><span class="play" aria-hidden="true">▶</span>
+          <span class="view-badge">${project.views} ${t("viewsShort")}</span><span class="play" aria-hidden="true">▶</span>
         </a>
-        <div class="project-meta"><span>0${index + 1} / ${project.category}</span><span>${project.channel}</span></div>
+        <div class="project-meta"><span>${String(index + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}</span><span>${project.category}</span></div>
         <h3><a href="https://www.youtube.com/watch?v=${project.videoId}" target="_blank" rel="noreferrer">${project.title}</a></h3>
         <p>${project[language]}</p>
+        <div class="project-performance" aria-label="${t("performanceLabel")}">
+          <div><strong>${project.views}</strong><span>${t("viewsLabel")}</span></div>
+          <div><strong>${project.rank}</strong><span>${t("rankLabel")}</span></div>
+          <div><strong>${project.share}</strong><span>${t("shareLabel")}</span></div>
+        </div>
       </article>`;
   }).join("");
 }
@@ -72,6 +77,17 @@ function renderProcess() {
 
 function renderTags() {
   document.querySelector("#about-tags").innerHTML = data.tags.map((tag) => `<span class="about-tag">${tag}</span>`).join("");
+}
+
+function renderPortrait() {
+  const portrait = document.querySelector("#about-portrait");
+  if (data.profile?.image) {
+    portrait.innerHTML = `<img src="${data.profile.image}" alt="${data.profile.alt || "Thanh Tam Phan"}" loading="lazy" />`;
+    portrait.classList.add("has-image");
+    return;
+  }
+  portrait.innerHTML = "<span>TTP</span>";
+  portrait.classList.remove("has-image");
 }
 
 function renderContact() {
@@ -101,6 +117,7 @@ function render() {
   renderExpertise();
   renderProcess();
   renderTags();
+  renderPortrait();
   renderContact();
   activateReveal();
 }
