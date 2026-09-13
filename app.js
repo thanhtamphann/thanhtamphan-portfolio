@@ -6,8 +6,31 @@ let activeFilter = "All";
 const WORK_EMAIL = "thanhtamphannforwork@gmail.com";
 const TELEGRAM_HANDLE = "thanhtamphann";
 
+const CATEGORY_LABELS_VI = {
+  Psychology: "Tâm lý",
+  Travel: "Du lịch",
+  History: "Lịch sử",
+  Science: "Khoa học",
+  "Self-growth": "Phát triển bản thân"
+};
+
+const TAG_LABELS_VI = {
+  "Long-form": "Nội dung dài",
+  Documentary: "Tài liệu",
+  Explainer: "Giải thích chuyên sâu",
+  Psychology: "Tâm lý",
+  Travel: "Du lịch",
+  History: "Lịch sử",
+  Science: "Khoa học",
+  "Self-development": "Phát triển bản thân"
+};
+
 function t(key) {
   return translations?.[language]?.[key] || key;
+}
+
+function categoryLabel(category) {
+  return language === "vi" ? (CATEGORY_LABELS_VI[category] || category) : category;
 }
 
 function renderStaticText() {
@@ -32,7 +55,7 @@ function renderFilters() {
   const categories = ["All", ...new Set(data.projects.map((project) => project.category))];
   document.querySelector("#filters").innerHTML = categories.map((category) => `
     <button class="filter-btn ${activeFilter === category ? "active" : ""}" type="button" data-filter="${category}">
-      ${category === "All" ? t("all") : category}
+      ${category === "All" ? t("all") : categoryLabel(category)}
     </button>`).join("");
   document.querySelectorAll(".filter-btn").forEach((button) => button.addEventListener("click", () => {
     activeFilter = button.dataset.filter;
@@ -75,7 +98,7 @@ function renderProjects() {
           <img src="${image}" onerror="this.onerror=null;this.src='${fallback}'" alt="Thumbnail for ${project.title}" loading="lazy" />
           <span class="view-badge">${project.views} ${t("viewsShort")}</span><span class="play" aria-hidden="true">▶</span>
         </a>
-        <div class="project-meta"><span>${String(index + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}</span><span>${project.category}</span></div>
+        <div class="project-meta"><span>${String(index + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}</span><span>${categoryLabel(project.category)}</span></div>
         <h3><a href="${videoUrl}" target="_blank" rel="noreferrer">${project.title}</a></h3>
         <p>${project[language]}</p>
         <div class="project-performance" aria-label="${t("performanceLabel")}">
@@ -99,7 +122,10 @@ function renderProcess() {
 }
 
 function renderTags() {
-  document.querySelector("#about-tags").innerHTML = data.tags.map((tag) => `<span class="about-tag">${tag}</span>`).join("");
+  document.querySelector("#about-tags").innerHTML = data.tags.map((tag) => {
+    const label = language === "vi" ? (TAG_LABELS_VI[tag] || tag) : tag;
+    return `<span class="about-tag">${label}</span>`;
+  }).join("");
 }
 
 function renderPortrait() {
