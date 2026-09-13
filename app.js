@@ -38,26 +38,46 @@ function renderFilters() {
   }));
 }
 
+function getYouTubeId(project) {
+  if (project.videoId) return project.videoId;
+  if (!project.videoUrl) return "";
+
+  try {
+    const url = new URL(project.videoUrl);
+    if (url.hostname.includes("youtu.be")) return url.pathname.split("/").filter(Boolean)[0] || "";
+    if (url.searchParams.get("v")) return url.searchParams.get("v");
+    const parts = url.pathname.split("/").filter(Boolean);
+    const marker = parts.findIndex((part) => part === "shorts" || part === "embed");
+    return marker >= 0 ? parts[marker + 1] || "" : "";
+  } catch {
+    return "";
+  }
+}
+
 function renderProjects() {
   const projects = activeFilter === "All" ? data.projects : data.projects.filter((project) => project.category === activeFilter);
   document.querySelector("#project-grid").innerHTML = projects.map((project, index) => {
-    const youtubeImage = `https://i.ytimg.com/vi/${project.videoId}/maxresdefault.jpg`;
+    const videoId = getYouTubeId(project);
+    const videoUrl = project.videoUrl || `https://www.youtube.com/watch?v=${videoId}`;
+    const youtubeImage = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
     const image = project.image || youtubeImage;
-    const fallback = project.image ? youtubeImage : `https://i.ytimg.com/vi/${project.videoId}/hqdefault.jpg`;
+    const fallback = project.image ? youtubeImage : `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+    const secondaryMetric = project.likes || project.averageViews;
+    const secondaryLabel = project.likes ? t("likesLabel") : t("averageViewsLabel");
+    const secondaryMarkup = secondaryMetric ? `<div><strong>${secondaryMetric}</strong><span>${secondaryLabel}</span></div>` : "";
 
     return `
       <article class="project-card reveal visible">
-        <a class="project-image" href="https://www.youtube.com/watch?v=${project.videoId}" target="_blank" rel="noreferrer" aria-label="${t("watch")}: ${project.title}">
+        <a class="project-image" href="${videoUrl}" target="_blank" rel="noreferrer" aria-label="${t("watch")}: ${project.title}">
           <img src="${image}" onerror="this.onerror=null;this.src='${fallback}'" alt="Thumbnail for ${project.title}" loading="lazy" />
           <span class="view-badge">${project.views} ${t("viewsShort")}</span><span class="play" aria-hidden="true">▶</span>
         </a>
         <div class="project-meta"><span>${String(index + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}</span><span>${project.category}</span></div>
-        <h3><a href="https://www.youtube.com/watch?v=${project.videoId}" target="_blank" rel="noreferrer">${project.title}</a></h3>
+        <h3><a href="${videoUrl}" target="_blank" rel="noreferrer">${project.title}</a></h3>
         <p>${project[language]}</p>
         <div class="project-performance" aria-label="${t("performanceLabel")}">
           <div><strong>${project.views}</strong><span>${t("viewsLabel")}</span></div>
-          <div><strong>${project.rank}</strong><span>${t("rankLabel")}</span></div>
-          <div><strong>${project.share}</strong><span>${t("shareLabel")}</span></div>
+          ${secondaryMarkup}
         </div>
       </article>`;
   }).join("");
