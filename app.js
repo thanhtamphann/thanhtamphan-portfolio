@@ -3,9 +3,6 @@ let translations = null;
 let language = "en";
 let activeFilter = "All";
 
-const WORK_EMAIL = "thanhtamphannforwork@gmail.com";
-const TELEGRAM_HANDLE = "thanhtamphann";
-
 const CATEGORY_LABELS_VI = {
   Psychology: "Tâm lý",
   Travel: "Du lịch",
@@ -143,12 +140,31 @@ function renderPortrait() {
   });
 }
 
+function telegramHandle() {
+  return (data.contact?.telegram || "").replace(/^@/, "").trim();
+}
+
+function renderHeroContact() {
+  const container = document.querySelector("#hero-contact");
+  if (!container) return;
+  const links = [];
+  if (data.contact?.email) {
+    links.push(`<a href="mailto:${data.contact.email}">Email · ${data.contact.email}</a>`);
+  }
+  const handle = telegramHandle();
+  if (handle) {
+    links.push(`<a href="https://t.me/${handle}" target="_blank" rel="noreferrer">Telegram · @${handle}</a>`);
+  }
+  container.innerHTML = links.join("");
+}
+
 function renderContact() {
   const links = [];
-  if (data.contact.github) links.push({ label: t("github"), url: data.contact.github });
-  links.push({ label: "Email", url: `mailto:${WORK_EMAIL}` });
-  links.push({ label: "Telegram", url: `https://t.me/${TELEGRAM_HANDLE}` });
-  if (data.contact.linkedin) links.push({ label: t("linkedin"), url: data.contact.linkedin });
+  if (data.contact?.github) links.push({ label: t("github"), url: data.contact.github });
+  if (data.contact?.email) links.push({ label: t("email"), url: `mailto:${data.contact.email}` });
+  const handle = telegramHandle();
+  if (handle) links.push({ label: "Telegram", url: `https://t.me/${handle}` });
+  if (data.contact?.linkedin) links.push({ label: t("linkedin"), url: data.contact.linkedin });
   document.querySelector("#contact-links").innerHTML = links.map((link) => `<a class="contact-link" href="${link.url}" target="_blank" rel="noreferrer"><span>${link.label}</span><span>↗</span></a>`).join("");
 }
 
@@ -172,6 +188,7 @@ function render() {
   renderProcess();
   renderTags();
   renderPortrait();
+  renderHeroContact();
   renderContact();
   activateReveal();
 }
