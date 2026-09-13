@@ -1,82 +1,93 @@
 {
   "stats": [
-    { "value": "2.5+", "en": "Years writing for YouTube", "vi": "Năm viết kịch bản YouTube" },
-    { "value": "07", "en": "Channels in selected work", "vi": "Kênh trong portfolio" },
+    { "value": "10.1M+", "en": "Combined views across selected videos", "vi": "Tổng lượt xem của các video tiêu biểu" },
+    { "value": "03", "en": "Videos reaching over one million views", "vi": "Video đạt hơn một triệu lượt xem" },
     { "value": "3.4M", "en": "Top public video reach", "vi": "Lượt xem video nổi bật nhất" },
-    { "value": "A–Z", "en": "Research to full script", "vi": "Research đến full script" }
+    { "value": "2.5+", "en": "Years writing for YouTube", "vi": "Năm viết kịch bản YouTube" }
   ],
   "projects": [
     {
-      "channel": "PsychToons",
       "category": "Psychology",
       "videoId": "N95Tb2sDWVs",
       "image": "",
       "title": "Psychology of People Who Go Quiet When They’re Hurt",
-      "views": "2.3M views",
+      "views": "2.3M",
+      "rank": "#2",
+      "share": "22.7%",
       "en": "Psychology concepts shaped into accessible, curiosity-led long-form narratives.",
       "vi": "Biến các khái niệm tâm lý thành câu chuyện dài dễ hiểu và giàu tính tò mò."
     },
     {
-      "channel": "Trace The Globe",
       "category": "Travel",
       "videoId": "XuUOSeWsRjY",
       "image": "",
       "title": "Saudi Arabia: A Side You’ve Never Seen",
-      "views": "1.7M views",
+      "views": "1.7M",
+      "rank": "#3",
+      "share": "16.8%",
       "en": "Cinematic destination storytelling grounded in culture, contrast, and discovery.",
       "vi": "Kể chuyện điểm đến giàu hình ảnh, dựa trên văn hóa, tương phản và khám phá."
     },
     {
-      "channel": "Hidden Compass",
       "category": "Travel",
       "videoId": "FaVKH4NTumM",
       "image": "",
       "title": "Nepal: An Impossible Country Revealed by a Deadly Himalayan Flash Flood",
-      "views": "885K views",
+      "views": "885K",
+      "rank": "#5",
+      "share": "8.7%",
       "en": "Immersive documentary structure that turns geography into high-stakes human stories.",
       "vi": "Cấu trúc phim tài liệu cuốn hút, biến địa lý thành những câu chuyện con người đầy kịch tính."
     },
     {
-      "channel": "Ink Explainer",
       "category": "History",
       "videoId": "49_Ph2q6uIM",
       "image": "",
       "title": "What Did Ancient Humans Actually Do All Day?",
-      "views": "3.4M views",
+      "views": "3.4M",
+      "rank": "#1",
+      "share": "33.6%",
       "en": "Research-heavy explainers that make distant history vivid, specific, and entertaining.",
       "vi": "Video giải thích chuyên sâu, làm lịch sử xa xưa trở nên sống động và dễ tiếp cận."
     },
     {
-      "channel": "Quark",
       "category": "Science",
       "videoId": "vIqTRyX-cq0",
       "image": "",
       "title": "What Do Animals Think Of Humans?",
-      "views": "985K views",
+      "views": "985K",
+      "rank": "#4",
+      "share": "9.7%",
       "en": "Big science questions explored through playful hooks and tightly paced explanations.",
       "vi": "Khám phá câu hỏi khoa học lớn bằng hook thú vị và nhịp giải thích chặt chẽ."
     },
     {
-      "channel": "Iconic Femme",
       "category": "Self-growth",
       "videoId": "ZGpHhnccxvY",
       "image": "",
       "title": "Hobbies That Make You Smarter",
-      "views": "734K views",
+      "views": "734K",
+      "rank": "#6",
+      "share": "7.3%",
       "en": "Actionable self-development scripts with a warm, confident, audience-aware voice.",
       "vi": "Kịch bản phát triển bản thân thực tế với giọng văn ấm áp, tự tin và thấu hiểu người xem."
     },
     {
-      "channel": "DesireDiaries",
       "category": "Self-growth",
       "videoId": "9CUp_MJOrsw",
       "image": "",
       "title": "How to Use This Summer to Completely Change Your Life",
-      "views": "114K views",
+      "views": "114K",
+      "rank": "#7",
+      "share": "1.1%",
       "en": "Motivational storytelling balanced with logic, structure, and practical next steps.",
       "vi": "Kể chuyện truyền cảm hứng cân bằng với logic, cấu trúc và các bước hành động thực tế."
     }
   ],
+  "profile": {
+    "image": "",
+    "alt": "Portrait of Thanh Tam Phan"
+  },
   "expertise": [
     { "title": { "en": "Research & fact-finding", "vi": "Nghiên cứu & kiểm chứng" }, "body": { "en": "Finding credible sources, unexpected details, and the tension that makes a topic worth watching.", "vi": "Tìm nguồn đáng tin cậy, chi tiết bất ngờ và mâu thuẫn khiến chủ đề đáng xem." } },
     { "title": { "en": "Hooks & retention", "vi": "Hook & giữ chân người xem" }, "body": { "en": "Opening with a clear promise, building open loops, and renewing curiosity before attention drops.", "vi": "Mở đầu bằng lời hứa rõ ràng, tạo vòng lặp tò mò và làm mới sự chú ý đúng lúc." } },
