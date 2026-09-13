@@ -12,6 +12,8 @@ A responsive, bilingual portfolio built as a lightweight static site. It uses of
 
 For a custom project image, upload it in the **Ảnh tùy chỉnh** field. Leave that field empty to keep using the official YouTube thumbnail automatically.
 
+The video list supports adding, deleting, and reordering entries. For a new video, paste its complete YouTube URL, add the title, views, optional likes or average views, descriptions, and an optional custom image.
+
 The editor is configured by **`.pages.yml`**. Editable content is stored in **`content/portfolio.json`** and **`content/copy.json`**. Layout lives in **`index.html`**, behavior in **`app.js`**, and styling in **`styles.css`**.
 
 ## Preview locally
