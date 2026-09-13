@@ -43,18 +43,11 @@ content:
             options:
               values: [Psychology, Travel, History, Science, Self-growth]
             required: true
-          - name: videoUrl
-            label: Link video YouTube
-            type: string
-            description: Dán link đầy đủ. Website sẽ tự lấy thumbnail nếu bạn không tải ảnh riêng.
-          - name: videoId
-            label: YouTube Video ID (dự phòng)
-            type: string
-            description: Có thể để trống nếu đã có link YouTube.
+          - { name: videoUrl, label: Link video YouTube, type: string }
+          - { name: videoId, label: YouTube Video ID, type: string }
           - name: image
             label: Ảnh thumbnail tùy chỉnh
             type: image
-            description: Không bắt buộc. Nếu để trống website sẽ dùng thumbnail YouTube.
             options:
               media: portfolio_images
               extensions: [jpg, jpeg, png, webp, gif]
@@ -74,7 +67,6 @@ content:
           - name: image
             label: Tải ảnh chân dung
             type: image
-            description: Nên dùng ảnh dọc tỷ lệ 4:5.
             options:
               media: portfolio_images
               extensions: [jpg, jpeg, png, webp]
@@ -84,11 +76,7 @@ content:
       - name: expertise
         label: Thế mạnh chuyên môn
         type: object
-        list:
-          min: 1
-          collapsible:
-            collapsed: true
-            summary: "{fields.title.vi}"
+        list: true
         fields:
           - name: title
             label: Tiêu đề
@@ -106,11 +94,7 @@ content:
       - name: process
         label: Quy trình làm việc
         type: object
-        list:
-          min: 1
-          collapsible:
-            collapsed: true
-            summary: "{fields.title.vi}"
+        list: true
         fields:
           - name: title
             label: Tên bước
@@ -133,11 +117,11 @@ content:
       - name: contact
         label: Thông tin liên hệ
         type: object
-        description: Chỉnh ở đây sẽ tự cập nhật cả Hero và phần Liên hệ cuối trang.
+        description: Chỉnh ở đây sẽ tự cập nhật cả Hero và phần Liên hệ cuối trang. Không có trường số điện thoại.
         fields:
           - { name: github, label: Link GitHub, type: string }
           - { name: email, label: Email công việc, type: string }
-          - { name: telegram, label: Telegram username, type: string, description: Chỉ nhập username, ví dụ thanhtamphann }
+          - { name: telegram, label: Telegram username, type: string }
           - { name: linkedin, label: Link LinkedIn, type: string }
 
   - name: copy
@@ -309,3 +293,20 @@ content:
           - { name: github, label: Nhãn GitHub, type: string }
           - { name: email, label: Nhãn Email, type: string }
           - { name: linkedin, label: Nhãn LinkedIn, type: string }
+
+  - name: motion
+    label: 03. Hiệu ứng chuyển động
+    type: file
+    path: content/motion.json
+    format: json
+    fields:
+      - { name: enabled, label: Bật hiệu ứng, type: boolean }
+      - name: intensity
+        label: Mức độ hiệu ứng
+        type: select
+        options:
+          values: [subtle, medium, strong]
+      - { name: heroText, label: Hiệu ứng chữ ở trang đầu, type: boolean }
+      - { name: scrollReveal, label: Hiệu ứng khi cuộn trang, type: boolean }
+      - { name: hoverEffects, label: Hiệu ứng khi rê chuột, type: boolean }
+      - { name: statAnimation, label: Hiệu ứng số liệu, type: boolean }
