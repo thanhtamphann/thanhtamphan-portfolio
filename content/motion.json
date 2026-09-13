@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "intensity": "medium",
+  "heroText": true,
+  "scrollReveal": true,
+  "hoverEffects": true,
+  "statAnimation": true
+}
