@@ -9,19 +9,25 @@
     <meta property="og:description" content="Research-led strategy. Clear ideas. Stories people finish." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://i.ytimg.com/vi/49_Ph2q6uIM/maxresdefault.jpg" />
-    <meta name="portfolio-version" content="2026-09-14-live-2" />
+    <meta name="portfolio-version" content="2026-09-14-live-3" />
     <title>Thanh Tam Phan — Content Strategist & YouTube Scriptwriter</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260914-2" />
+    <link rel="stylesheet" href="styles.css?v=20260914-3" />
     <style>
       .results-intro,.case-studies,.tools{padding-top:clamp(90px,11vw,160px);padding-bottom:clamp(70px,9vw,130px)}
       .results-intro{padding-bottom:34px}.results-intro .section-heading{margin-bottom:0}.case-studies{background:#e5e1d7}
       .case-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.case-card{min-height:390px;padding:30px;border:1px solid rgba(17,17,15,.17);background:#f0eee8;display:flex;flex-direction:column}
       .case-label{font-family:"DM Mono",monospace;font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:#6f6d66}.case-card h3{margin:54px 0 22px;font-size:clamp(1.65rem,2.6vw,2.6rem);line-height:1.04;letter-spacing:-.045em;font-weight:500}.case-card p{margin:auto 0 0;color:#6f6d66;line-height:1.6}
       .tools{background:#f0eee8}.tool-list{display:flex;flex-wrap:wrap;gap:10px;max-width:1180px}.tool-list span{padding:13px 17px;border:1px solid rgba(17,17,15,.17);border-radius:999px;font-family:"DM Mono",monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;background:#fff8}
-      @media (max-width:900px){.case-grid{grid-template-columns:1fr}.case-card{min-height:auto}.case-card h3{margin-top:34px}.results-intro .section-heading{margin-bottom:0}}
+      .hero-main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,.55fr);gap:clamp(32px,6vw,90px);align-items:end}
+      .hero-photo{position:relative;display:grid;place-items:center;aspect-ratio:4/5;overflow:hidden;background:#11110f;color:#f0eee8;border-radius:2px}
+      .hero-photo:after{content:"";position:absolute;inset:14px;border:1px solid rgba(240,238,232,.24);pointer-events:none}
+      .hero-photo span{font-family:"Instrument Serif",serif;font-size:clamp(3rem,6vw,6rem)}
+      .hero-photo img{width:100%;height:100%;object-fit:cover}.hero-photo-note{margin-top:10px;color:#6f6d66;font-family:"DM Mono",monospace;font-size:.63rem;line-height:1.5;text-transform:uppercase;letter-spacing:.05em}
+      .hero-contact{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.hero-contact a{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(17,17,15,.18);border-radius:999px;font-family:"DM Mono",monospace;font-size:.67rem;transition:.2s}.hero-contact a:hover{background:#11110f;color:#f0eee8;border-color:#11110f}
+      @media (max-width:900px){.case-grid{grid-template-columns:1fr}.case-card{min-height:auto}.case-card h3{margin-top:34px}.results-intro .section-heading{margin-bottom:0}.hero-main{grid-template-columns:1fr}.hero-photo-wrap{max-width:360px}.hero{min-height:auto}.hero-bottom{align-items:flex-start}}
     </style>
   </head>
   <body>
@@ -29,7 +35,16 @@
     <header class="site-header" id="top"><a class="wordmark" href="#top" aria-label="Back to top">TT<span>P</span></a><nav class="desktop-nav" aria-label="Primary navigation"><a href="#work" data-i18n="navWork">Work</a><a href="#expertise" data-i18n="navExpertise">Expertise</a><a href="#process" data-i18n="navProcess">Process</a><a href="#contact" data-i18n="navContact">Contact</a></nav><div class="header-actions"><button class="language-toggle" type="button" aria-label="Switch language"><span class="active">EN</span><span>VI</span></button><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button></div></header>
     <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#work" data-i18n="navWork">Work</a><a href="#expertise" data-i18n="navExpertise">Expertise</a><a href="#process" data-i18n="navProcess">Process</a><a href="#contact" data-i18n="navContact">Contact</a></nav>
     <main>
-      <section class="hero section-pad"><div class="hero-kicker reveal"><span class="status-dot"></span><span data-i18n="availability">Available for remote content & creative opportunities</span></div><h1 class="reveal"><span data-i18n="heroLine1">I turn complex ideas</span><br /><em data-i18n="heroLine2">into stories people finish.</em></h1><div class="hero-bottom reveal"><p data-i18n="heroIntro">Content strategist, YouTube scriptwriter, and researcher crafting high-retention narratives for international audiences.</p><a class="round-link" href="#results" aria-label="View performance"><span>↓</span></a></div></section>
+      <section class="hero section-pad">
+        <div class="hero-kicker reveal"><span class="status-dot"></span><span data-i18n="availability">Available for remote content & creative opportunities</span></div>
+        <div class="hero-main">
+          <div>
+            <h1 class="reveal"><span data-i18n="heroLine1">I turn complex ideas</span><br /><em data-i18n="heroLine2">into stories people finish.</em></h1>
+            <div class="hero-bottom reveal"><div><p data-i18n="heroIntro">Content strategist, YouTube scriptwriter, and researcher crafting high-retention narratives for international audiences.</p><div class="hero-contact"><a href="mailto:thanhtamphannforwork@gmail.com">Email · thanhtamphannforwork@gmail.com</a><a href="https://t.me/thanhtamphann" target="_blank" rel="noreferrer">Telegram · @thanhtamphann</a></div></div><a class="round-link" href="#results" aria-label="View performance"><span>↓</span></a></div>
+          </div>
+          <div class="hero-photo-wrap reveal"><div class="hero-photo" id="hero-photo" aria-label="Portrait"><span>TTP</span></div><p class="hero-photo-note">Upload your portrait in Pages CMS → Video, số liệu & liên hệ → Ảnh cá nhân. Recommended ratio: 4:5.</p></div>
+        </div>
+      </section>
       <section class="results-intro section-pad" id="results"><div class="section-heading reveal"><div><p class="eyebrow" data-i18n="resultsEyebrow">Performance snapshot</p><h2><span data-i18n="resultsTitle">Proof before</span><br /><em data-i18n="resultsTitleEm">promises.</em></h2></div><p class="section-note" data-i18n="resultsNote">Selected public work has generated 24.2M+ combined views, with nine featured videos crossing one million views.</p></div></section>
       <section class="stats section-pad reveal" aria-label="Career highlights" id="stats"></section>
       <section class="work section-pad" id="work"><div class="section-heading reveal"><div><p class="eyebrow" data-i18n="workEyebrow">Selected video work</p><h2><span data-i18n="workTitle">Stories across</span><br /><em data-i18n="workTitleEm">different worlds.</em></h2></div><p class="section-note" data-i18n="workNote">Selected high-performing videos across multiple formats and subjects.</p></div><div class="filters reveal" id="filters" aria-label="Filter projects"></div><div class="project-grid" id="project-grid"></div></section>
@@ -42,6 +57,6 @@
       <section class="contact section-pad" id="contact"><p class="eyebrow reveal" data-i18n="contactEyebrow">Looking for a writer or content strategist?</p><h2 class="reveal"><span data-i18n="contactTitle">Let’s build something</span> <em data-i18n="contactEm">people want to finish.</em></h2><p class="contact-intro reveal" data-i18n="contactBody">Open to remote roles and partnerships in YouTube strategy, research-led content, scriptwriting, creative strategy and editorial development.</p><div class="contact-links reveal" id="contact-links"></div></section>
     </main>
     <footer class="site-footer section-pad"><p>© <span id="year"></span> Thanh Tam Phan</p><p data-i18n="footerRole">Content Strategist · YouTube Scriptwriter · Researcher</p><a href="#top" data-i18n="backTop">Back to top ↑</a></footer>
-    <script src="app.js?v=20260914-2"></script>
+    <script src="app.js?v=20260914-3"></script>
   </body>
 </html>
