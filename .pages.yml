@@ -9,7 +9,7 @@ media:
 
 content:
   - name: portfolio
-    label: Video, số liệu & liên hệ
+    label: 01. Video, số liệu, ảnh & liên hệ
     type: file
     path: content/portfolio.json
     format: json
@@ -21,25 +21,16 @@ content:
           min: 1
           collapsible:
             collapsed: true
-            summary: "{value} — {en}"
+            summary: "{value} — {vi}"
         fields:
-          - name: value
-            label: Con số
-            type: string
-            required: true
-          - name: en
-            label: Chú thích tiếng Anh
-            type: string
-            required: true
-          - name: vi
-            label: Chú thích tiếng Việt
-            type: string
-            required: true
+          - { name: value, label: Con số, type: string, required: true }
+          - { name: en, label: Chú thích tiếng Anh, type: string, required: true }
+          - { name: vi, label: Chú thích tiếng Việt, type: string, required: true }
 
       - name: projects
-        label: Video tiêu biểu — có thể thêm, xóa và sắp xếp
+        label: Video tiêu biểu
         type: object
-        description: Dùng nút thêm mục để tạo video mới. Kéo thả để đổi thứ tự hiển thị.
+        description: Có thể thêm, xóa, kéo thả đổi thứ tự. Khi thêm video mới chỉ cần dán link YouTube, điền tiêu đề và số liệu.
         list:
           min: 1
           collapsible:
@@ -48,74 +39,56 @@ content:
         fields:
           - name: category
             label: Chủ đề / bộ lọc
-            type: string
+            type: select
+            options:
+              values: [Psychology, Travel, History, Science, Self-growth]
             required: true
           - name: videoUrl
             label: Link video YouTube
             type: string
-            description: Chỉ cần dán toàn bộ đường dẫn YouTube. Website sẽ tự lấy thumbnail.
+            description: Dán link đầy đủ. Website sẽ tự lấy thumbnail nếu bạn không tải ảnh riêng.
           - name: videoId
             label: YouTube Video ID (dự phòng)
             type: string
-            description: Video cũ đang dùng ID. Khi thêm video mới, bạn có thể chỉ điền Link video YouTube ở trên.
+            description: Có thể để trống nếu đã có link YouTube.
           - name: image
-            label: Ảnh tùy chỉnh (không bắt buộc)
+            label: Ảnh thumbnail tùy chỉnh
             type: image
-            description: Để trống để website tự dùng thumbnail YouTube.
+            description: Không bắt buộc. Nếu để trống website sẽ dùng thumbnail YouTube.
             options:
               media: portfolio_images
               extensions: [jpg, jpeg, png, webp, gif]
               rename: safe
-          - name: title
-            label: Tiêu đề video
-            type: string
-            required: true
-          - name: views
-            label: Lượt xem công khai
-            type: string
-            required: true
-          - name: likes
-            label: Lượt thích công khai (không bắt buộc)
-            type: string
-            description: Ví dụ 26.7K. Nếu có số này, website sẽ ưu tiên hiển thị Likes.
-          - name: averageViews
-            label: View trung bình ước tính
-            type: string
-            description: Không bắt buộc. View trung bình của các video tiêu biểu trong cùng nhóm nội dung.
-          - name: en
-            label: Mô tả tiếng Anh
-            type: text
-            required: true
-          - name: vi
-            label: Mô tả tiếng Việt
-            type: text
-            required: true
+          - { name: title, label: Tiêu đề video, type: string, required: true }
+          - { name: views, label: Lượt xem, type: string, required: true }
+          - { name: likes, label: Lượt thích, type: string }
+          - { name: averageViews, label: View trung bình ước tính, type: string }
+          - { name: en, label: Mô tả tiếng Anh, type: text, required: true }
+          - { name: vi, label: Mô tả tiếng Việt, type: text, required: true }
 
       - name: profile
         label: Ảnh cá nhân
         type: object
+        description: Ảnh này dùng cho cả trang đầu và phần Giới thiệu.
         fields:
           - name: image
             label: Tải ảnh chân dung
             type: image
-            description: Có thể để trống và tải ảnh của bạn lên sau. Ảnh dọc tỷ lệ 4:5 sẽ đẹp nhất.
+            description: Nên dùng ảnh dọc tỷ lệ 4:5.
             options:
               media: portfolio_images
               extensions: [jpg, jpeg, png, webp]
               rename: safe
-          - name: alt
-            label: Mô tả ảnh
-            type: string
-            description: Dùng cho khả năng truy cập và công cụ tìm kiếm.
+          - { name: alt, label: Mô tả ảnh, type: string }
 
       - name: expertise
-        label: Kỹ năng
+        label: Thế mạnh chuyên môn
         type: object
         list:
           min: 1
           collapsible:
             collapsed: true
-            summary: "{fields.title.en}"
+            summary: "{fields.title.vi}"
         fields:
           - name: title
             label: Tiêu đề
@@ -137,7 +110,7 @@ content:
           min: 1
           collapsible:
             collapsed: true
-            summary: "{fields.title.en}"
+            summary: "{fields.title.vi}"
         fields:
           - name: title
             label: Tên bước
@@ -146,33 +119,29 @@ content:
               - { name: en, label: Tiếng Anh, type: string, required: true }
               - { name: vi, label: Tiếng Việt, type: string, required: true }
           - name: body
-            label: Mô tả bước
+            label: Mô tả
             type: object
             fields:
               - { name: en, label: Tiếng Anh, type: text, required: true }
               - { name: vi, label: Tiếng Việt, type: text, required: true }
 
       - name: tags
-        label: Thẻ chuyên môn
+        label: Thẻ chuyên môn ở phần Giới thiệu
         type: string
         list: true
 
       - name: contact
         label: Thông tin liên hệ
         type: object
+        description: Chỉnh ở đây sẽ tự cập nhật cả Hero và phần Liên hệ cuối trang.
         fields:
-          - name: github
-            label: Link GitHub
-            type: string
-          - name: email
-            label: Email
-            type: string
-          - name: linkedin
-            label: Link LinkedIn
-            type: string
+          - { name: github, label: Link GitHub, type: string }
+          - { name: email, label: Email công việc, type: string }
+          - { name: telegram, label: Telegram username, type: string, description: Chỉ nhập username, ví dụ thanhtamphann }
+          - { name: linkedin, label: Link LinkedIn, type: string }
 
   - name: copy
-    label: Toàn bộ chữ trên trang
+    label: 02. Toàn bộ chữ trên website
     type: file
     path: content/copy.json
     format: json
@@ -181,90 +150,162 @@ content:
         label: Nội dung tiếng Anh
         type: object
         fields:
-          - { name: navWork, label: Menu — Work, type: string, required: true }
-          - { name: navExpertise, label: Menu — Expertise, type: string, required: true }
-          - { name: navProcess, label: Menu — Process, type: string, required: true }
-          - { name: navContact, label: Menu — Contact, type: string, required: true }
-          - { name: availability, label: Trạng thái nhận dự án, type: string, required: true }
-          - { name: heroLine1, label: Tiêu đề chính — dòng 1, type: string, required: true }
-          - { name: heroLine2, label: Tiêu đề chính — dòng nhấn mạnh, type: string, required: true }
-          - { name: heroIntro, label: Giới thiệu ngắn, type: text, required: true }
-          - { name: workEyebrow, label: Nhãn phần dự án, type: string, required: true }
-          - { name: workTitle, label: Tiêu đề dự án — dòng 1, type: string, required: true }
-          - { name: workTitleEm, label: Tiêu đề dự án — dòng nhấn mạnh, type: string, required: true }
-          - { name: workNote, label: Ghi chú dự án, type: text, required: true }
-          - { name: expertiseEyebrow, label: Nhãn phần kỹ năng, type: string, required: true }
-          - { name: expertiseTitle, label: Tiêu đề kỹ năng — dòng 1, type: string, required: true }
-          - { name: expertiseTitleEm, label: Tiêu đề kỹ năng — dòng nhấn mạnh, type: string, required: true }
-          - { name: expertiseNote, label: Ghi chú kỹ năng, type: text, required: true }
-          - { name: philosophyEyebrow, label: Nhãn triết lý, type: string, required: true }
-          - { name: philosophyQuote, label: Câu triết lý, type: text, required: true }
-          - { name: processEyebrow, label: Nhãn quy trình, type: string, required: true }
-          - { name: processTitle, label: Tiêu đề quy trình — dòng 1, type: string, required: true }
-          - { name: processTitleEm, label: Tiêu đề quy trình — dòng nhấn mạnh, type: string, required: true }
-          - { name: aboutTitleLine1, label: Giới thiệu — tiêu đề dòng 1, type: string, required: true }
-          - { name: aboutTitleLine2, label: Giới thiệu — tiêu đề dòng 2, type: string, required: true }
-          - { name: aboutTitleEm, label: Giới thiệu — dòng nhấn mạnh, type: string, required: true }
-          - { name: aboutBody, label: Giới thiệu bản thân, type: text, required: true }
-          - { name: contactEyebrow, label: Nhãn liên hệ, type: string, required: true }
-          - { name: contactTitle, label: Tiêu đề liên hệ — dòng 1, type: string, required: true }
-          - { name: contactEm, label: Tiêu đề liên hệ — dòng nhấn mạnh, type: string, required: true }
-          - { name: contactBody, label: Lời mời liên hệ, type: text, required: true }
-          - { name: footerRole, label: Vai trò ở chân trang, type: string, required: true }
-          - { name: backTop, label: Nút lên đầu trang, type: string, required: true }
-          - { name: all, label: Bộ lọc tất cả, type: string, required: true }
-          - { name: watch, label: Nhãn xem YouTube, type: string, required: true }
-          - { name: viewsShort, label: Nhãn lượt xem ngắn, type: string, required: true }
-          - { name: performanceLabel, label: Nhãn hiệu suất video, type: string, required: true }
-          - { name: viewsLabel, label: Nhãn lượt xem công khai, type: string, required: true }
-          - { name: likesLabel, label: Nhãn lượt thích, type: string, required: true }
-          - { name: averageViewsLabel, label: Nhãn view trung bình, type: string, required: true }
-          - { name: github, label: Nhãn GitHub, type: string, required: true }
-          - { name: email, label: Nhãn Email, type: string, required: true }
-          - { name: linkedin, label: Nhãn LinkedIn, type: string, required: true }
+          - { name: navWork, label: Menu — Work, type: string }
+          - { name: navExpertise, label: Menu — Expertise, type: string }
+          - { name: navProcess, label: Menu — Process, type: string }
+          - { name: navContact, label: Menu — Contact, type: string }
+          - { name: availability, label: Hero — trạng thái, type: string }
+          - { name: heroLine1, label: Hero — dòng 1, type: string }
+          - { name: heroLine2, label: Hero — dòng nhấn, type: string }
+          - { name: heroIntro, label: Hero — giới thiệu ngắn, type: text }
+          - { name: heroPhotoNote, label: Hero — hướng dẫn ảnh, type: text }
+          - { name: resultsEyebrow, label: Kết quả — nhãn, type: string }
+          - { name: resultsTitle, label: Kết quả — tiêu đề dòng 1, type: string }
+          - { name: resultsTitleEm, label: Kết quả — dòng nhấn, type: string }
+          - { name: resultsNote, label: Kết quả — mô tả, type: text }
+          - { name: workEyebrow, label: Dự án — nhãn, type: string }
+          - { name: workTitle, label: Dự án — tiêu đề dòng 1, type: string }
+          - { name: workTitleEm, label: Dự án — dòng nhấn, type: string }
+          - { name: workNote, label: Dự án — mô tả, type: text }
+          - { name: caseEyebrow, label: Case study — nhãn, type: string }
+          - { name: caseTitle, label: Case study — tiêu đề dòng 1, type: string }
+          - { name: caseTitleEm, label: Case study — dòng nhấn, type: string }
+          - { name: caseNote, label: Case study — mô tả chung, type: text }
+          - { name: case1Label, label: Case 1 — nhãn, type: string }
+          - { name: case1Title, label: Case 1 — tiêu đề, type: text }
+          - { name: case1Body, label: Case 1 — nội dung, type: text }
+          - { name: case2Label, label: Case 2 — nhãn, type: string }
+          - { name: case2Title, label: Case 2 — tiêu đề, type: text }
+          - { name: case2Body, label: Case 2 — nội dung, type: text }
+          - { name: case3Label, label: Case 3 — nhãn, type: string }
+          - { name: case3Title, label: Case 3 — tiêu đề, type: text }
+          - { name: case3Body, label: Case 3 — nội dung, type: text }
+          - { name: expertiseEyebrow, label: Thế mạnh — nhãn, type: string }
+          - { name: expertiseTitle, label: Thế mạnh — dòng 1, type: string }
+          - { name: expertiseTitleEm, label: Thế mạnh — dòng nhấn, type: string }
+          - { name: expertiseNote, label: Thế mạnh — mô tả, type: text }
+          - { name: toolsEyebrow, label: Skills & Tools — nhãn, type: string }
+          - { name: toolsTitle, label: Skills & Tools — dòng 1, type: string }
+          - { name: toolsTitleEm, label: Skills & Tools — dòng nhấn, type: string }
+          - { name: toolsNote, label: Skills & Tools — mô tả, type: text }
+          - { name: toolDeepResearch, label: Skill — Deep Research, type: string }
+          - { name: toolFactChecking, label: Skill — Fact Checking, type: string }
+          - { name: toolAudiencePsychology, label: Skill — Audience Psychology, type: string }
+          - { name: toolHooks, label: Skill — Hooks, type: string }
+          - { name: toolStoryStructure, label: Skill — Story Structure, type: string }
+          - { name: toolTopicIdeation, label: Skill — Topic Ideation, type: string }
+          - { name: toolCompetitorResearch, label: Skill — Competitor Research, type: string }
+          - { name: toolYouTubeStrategy, label: Skill — YouTube Strategy, type: string }
+          - { name: toolGoogleTrends, label: Tool — Google Trends, type: string }
+          - { name: toolYouTubeAnalytics, label: Tool — YouTube Analytics, type: string }
+          - { name: toolGoogleDocs, label: Tool — Google Docs, type: string }
+          - { name: toolNotion, label: Tool — Notion, type: string }
+          - { name: toolCanva, label: Tool — Canva, type: string }
+          - { name: toolAIResearch, label: Tool — AI Research, type: string }
+          - { name: philosophyEyebrow, label: Quan điểm viết — nhãn, type: string }
+          - { name: philosophyQuote, label: Quan điểm viết — câu chính, type: text }
+          - { name: processEyebrow, label: Quy trình — nhãn, type: string }
+          - { name: processTitle, label: Quy trình — dòng 1, type: string }
+          - { name: processTitleEm, label: Quy trình — dòng nhấn, type: string }
+          - { name: aboutTitleLine1, label: About — dòng 1, type: string }
+          - { name: aboutTitleLine2, label: About — dòng 2, type: string }
+          - { name: aboutTitleEm, label: About — dòng nhấn, type: string }
+          - { name: aboutBody, label: About — nội dung, type: text }
+          - { name: contactEyebrow, label: Liên hệ — nhãn, type: string }
+          - { name: contactTitle, label: Liên hệ — dòng 1, type: string }
+          - { name: contactEm, label: Liên hệ — dòng nhấn, type: string }
+          - { name: contactBody, label: Liên hệ — mô tả, type: text }
+          - { name: footerRole, label: Footer — vai trò, type: string }
+          - { name: backTop, label: Footer — nút lên đầu, type: string }
+          - { name: all, label: Bộ lọc — tất cả video, type: string }
+          - { name: watch, label: Nút xem YouTube, type: string }
+          - { name: viewsShort, label: Nhãn views, type: string }
+          - { name: performanceLabel, label: Nhãn hiệu suất, type: string }
+          - { name: viewsLabel, label: Nhãn lượt xem, type: string }
+          - { name: likesLabel, label: Nhãn lượt thích, type: string }
+          - { name: averageViewsLabel, label: Nhãn view trung bình, type: string }
+          - { name: github, label: Nhãn GitHub, type: string }
+          - { name: email, label: Nhãn Email, type: string }
+          - { name: linkedin, label: Nhãn LinkedIn, type: string }
 
       - name: vi
         label: Nội dung tiếng Việt
         type: object
         fields:
-          - { name: navWork, label: Menu — Dự án, type: string, required: true }
-          - { name: navExpertise, label: Menu — Kỹ năng, type: string, required: true }
-          - { name: navProcess, label: Menu — Quy trình, type: string, required: true }
-          - { name: navContact, label: Menu — Liên hệ, type: string, required: true }
-          - { name: availability, label: Trạng thái nhận dự án, type: string, required: true }
-          - { name: heroLine1, label: Tiêu đề chính — dòng 1, type: string, required: true }
-          - { name: heroLine2, label: Tiêu đề chính — dòng nhấn mạnh, type: string, required: true }
-          - { name: heroIntro, label: Giới thiệu ngắn, type: text, required: true }
-          - { name: workEyebrow, label: Nhãn phần dự án, type: string, required: true }
-          - { name: workTitle, label: Tiêu đề dự án — dòng 1, type: string, required: true }
-          - { name: workTitleEm, label: Tiêu đề dự án — dòng nhấn mạnh, type: string, required: true }
-          - { name: workNote, label: Ghi chú dự án, type: text, required: true }
-          - { name: expertiseEyebrow, label: Nhãn phần kỹ năng, type: string, required: true }
-          - { name: expertiseTitle, label: Tiêu đề kỹ năng — dòng 1, type: string, required: true }
-          - { name: expertiseTitleEm, label: Tiêu đề kỹ năng — dòng nhấn mạnh, type: string, required: true }
-          - { name: expertiseNote, label: Ghi chú kỹ năng, type: text, required: true }
-          - { name: philosophyEyebrow, label: Nhãn triết lý, type: string, required: true }
-          - { name: philosophyQuote, label: Câu triết lý, type: text, required: true }
-          - { name: processEyebrow, label: Nhãn quy trình, type: string, required: true }
-          - { name: processTitle, label: Tiêu đề quy trình — dòng 1, type: string, required: true }
-          - { name: processTitleEm, label: Tiêu đề quy trình — dòng nhấn mạnh, type: string, required: true }
-          - { name: aboutTitleLine1, label: Giới thiệu — tiêu đề dòng 1, type: string, required: true }
-          - { name: aboutTitleLine2, label: Giới thiệu — tiêu đề dòng 2, type: string, required: true }
-          - { name: aboutTitleEm, label: Giới thiệu — dòng nhấn mạnh, type: string, required: true }
-          - { name: aboutBody, label: Giới thiệu bản thân, type: text, required: true }
-          - { name: contactEyebrow, label: Nhãn liên hệ, type: string, required: true }
-          - { name: contactTitle, label: Tiêu đề liên hệ — dòng 1, type: string, required: true }
-          - { name: contactEm, label: Tiêu đề liên hệ — dòng nhấn mạnh, type: string, required: true }
-          - { name: contactBody, label: Lời mời liên hệ, type: text, required: true }
-          - { name: footerRole, label: Vai trò ở chân trang, type: string, required: true }
-          - { name: backTop, label: Nút lên đầu trang, type: string, required: true }
-          - { name: all, label: Bộ lọc tất cả, type: string, required: true }
-          - { name: watch, label: Nhãn xem YouTube, type: string, required: true }
-          - { name: viewsShort, label: Nhãn lượt xem ngắn, type: string, required: true }
-          - { name: performanceLabel, label: Nhãn hiệu suất video, type: string, required: true }
-          - { name: viewsLabel, label: Nhãn lượt xem công khai, type: string, required: true }
-          - { name: likesLabel, label: Nhãn lượt thích, type: string, required: true }
-          - { name: averageViewsLabel, label: Nhãn view trung bình, type: string, required: true }
-          - { name: github, label: Nhãn GitHub, type: string, required: true }
-          - { name: email, label: Nhãn Email, type: string, required: true }
-          - { name: linkedin, label: Nhãn LinkedIn, type: string, required: true }
+          - { name: navWork, label: Menu — Dự án, type: string }
+          - { name: navExpertise, label: Menu — Thế mạnh, type: string }
+          - { name: navProcess, label: Menu — Cách làm việc, type: string }
+          - { name: navContact, label: Menu — Liên hệ, type: string }
+          - { name: availability, label: Hero — trạng thái, type: string }
+          - { name: heroLine1, label: Hero — dòng 1, type: string }
+          - { name: heroLine2, label: Hero — dòng nhấn, type: string }
+          - { name: heroIntro, label: Hero — giới thiệu ngắn, type: text }
+          - { name: heroPhotoNote, label: Hero — hướng dẫn tải ảnh, type: text }
+          - { name: resultsEyebrow, label: Kết quả — nhãn, type: string }
+          - { name: resultsTitle, label: Kết quả — dòng 1, type: string }
+          - { name: resultsTitleEm, label: Kết quả — dòng nhấn, type: string }
+          - { name: resultsNote, label: Kết quả — mô tả, type: text }
+          - { name: workEyebrow, label: Dự án — nhãn, type: string }
+          - { name: workTitle, label: Dự án — dòng 1, type: string }
+          - { name: workTitleEm, label: Dự án — dòng nhấn, type: string }
+          - { name: workNote, label: Dự án — mô tả, type: text }
+          - { name: caseEyebrow, label: Phân tích dự án — nhãn, type: string }
+          - { name: caseTitle, label: Phân tích dự án — dòng 1, type: string }
+          - { name: caseTitleEm, label: Phân tích dự án — dòng nhấn, type: string }
+          - { name: caseNote, label: Phân tích dự án — mô tả chung, type: text }
+          - { name: case1Label, label: Case 1 — nhãn, type: string }
+          - { name: case1Title, label: Case 1 — tiêu đề, type: text }
+          - { name: case1Body, label: Case 1 — nội dung, type: text }
+          - { name: case2Label, label: Case 2 — nhãn, type: string }
+          - { name: case2Title, label: Case 2 — tiêu đề, type: text }
+          - { name: case2Body, label: Case 2 — nội dung, type: text }
+          - { name: case3Label, label: Case 3 — nhãn, type: string }
+          - { name: case3Title, label: Case 3 — tiêu đề, type: text }
+          - { name: case3Body, label: Case 3 — nội dung, type: text }
+          - { name: expertiseEyebrow, label: Thế mạnh — nhãn, type: string }
+          - { name: expertiseTitle, label: Thế mạnh — dòng 1, type: string }
+          - { name: expertiseTitleEm, label: Thế mạnh — dòng nhấn, type: string }
+          - { name: expertiseNote, label: Thế mạnh — mô tả, type: text }
+          - { name: toolsEyebrow, label: Kỹ năng & công cụ — nhãn, type: string }
+          - { name: toolsTitle, label: Kỹ năng & công cụ — dòng 1, type: string }
+          - { name: toolsTitleEm, label: Kỹ năng & công cụ — dòng nhấn, type: string }
+          - { name: toolsNote, label: Kỹ năng & công cụ — mô tả, type: text }
+          - { name: toolDeepResearch, label: Kỹ năng — Nghiên cứu chuyên sâu, type: string }
+          - { name: toolFactChecking, label: Kỹ năng — Kiểm chứng thông tin, type: string }
+          - { name: toolAudiencePsychology, label: Kỹ năng — Tâm lý người xem, type: string }
+          - { name: toolHooks, label: Kỹ năng — Hook & tò mò, type: string }
+          - { name: toolStoryStructure, label: Kỹ năng — Cấu trúc câu chuyện, type: string }
+          - { name: toolTopicIdeation, label: Kỹ năng — Phát triển ý tưởng, type: string }
+          - { name: toolCompetitorResearch, label: Kỹ năng — Phân tích đối thủ, type: string }
+          - { name: toolYouTubeStrategy, label: Kỹ năng — Chiến lược YouTube, type: string }
+          - { name: toolGoogleTrends, label: Công cụ — Google Trends, type: string }
+          - { name: toolYouTubeAnalytics, label: Công cụ — YouTube Analytics, type: string }
+          - { name: toolGoogleDocs, label: Công cụ — Google Docs, type: string }
+          - { name: toolNotion, label: Công cụ — Notion, type: string }
+          - { name: toolCanva, label: Công cụ — Canva, type: string }
+          - { name: toolAIResearch, label: Công cụ — AI hỗ trợ nghiên cứu, type: string }
+          - { name: philosophyEyebrow, label: Quan điểm khi viết — nhãn, type: string }
+          - { name: philosophyQuote, label: Quan điểm khi viết — câu chính, type: text }
+          - { name: processEyebrow, label: Quy trình — nhãn, type: string }
+          - { name: processTitle, label: Quy trình — dòng 1, type: string }
+          - { name: processTitleEm, label: Quy trình — dòng nhấn, type: string }
+          - { name: aboutTitleLine1, label: Giới thiệu — dòng 1, type: string }
+          - { name: aboutTitleLine2, label: Giới thiệu — dòng 2, type: string }
+          - { name: aboutTitleEm, label: Giới thiệu — dòng nhấn, type: string }
+          - { name: aboutBody, label: Giới thiệu — nội dung, type: text }
+          - { name: contactEyebrow, label: Liên hệ — nhãn, type: string }
+          - { name: contactTitle, label: Liên hệ — dòng 1, type: string }
+          - { name: contactEm, label: Liên hệ — dòng nhấn, type: string }
+          - { name: contactBody, label: Liên hệ — mô tả, type: text }
+          - { name: footerRole, label: Footer — vai trò, type: string }
+          - { name: backTop, label: Footer — nút lên đầu, type: string }
+          - { name: all, label: Bộ lọc — tất cả video, type: string }
+          - { name: watch, label: Nút xem YouTube, type: string }
+          - { name: viewsShort, label: Nhãn lượt xem ngắn, type: string }
+          - { name: performanceLabel, label: Nhãn hiệu suất, type: string }
+          - { name: viewsLabel, label: Nhãn lượt xem, type: string }
+          - { name: likesLabel, label: Nhãn lượt thích, type: string }
+          - { name: averageViewsLabel, label: Nhãn view trung bình, type: string }
+          - { name: github, label: Nhãn GitHub, type: string }
+          - { name: email, label: Nhãn Email, type: string }
+          - { name: linkedin, label: Nhãn LinkedIn, type: string }
