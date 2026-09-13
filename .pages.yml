@@ -43,12 +43,8 @@ content:
           min: 1
           collapsible:
             collapsed: true
-            summary: "{channel} — {title}"
+            summary: "{title}"
         fields:
-          - name: channel
-            label: Tên kênh
-            type: string
-            required: true
           - name: category
             label: Chủ đề / bộ lọc
             type: string
@@ -71,9 +67,19 @@ content:
             type: string
             required: true
           - name: views
-            label: Lượt xem hiển thị
+            label: Lượt xem công khai
             type: string
             required: true
+          - name: rank
+            label: Xếp hạng theo lượt xem
+            type: string
+            required: true
+            description: Ví dụ #1, #2, #3 trong danh sách video tiêu biểu.
+          - name: share
+            label: Tỷ trọng trong tổng lượt xem
+            type: string
+            required: true
+            description: Ví dụ 22.7%.
           - name: en
             label: Mô tả tiếng Anh
             type: text
@@ -82,6 +88,23 @@ content:
             label: Mô tả tiếng Việt
             type: text
             required: true
+
+      - name: profile
+        label: Ảnh cá nhân
+        type: object
+        fields:
+          - name: image
+            label: Tải ảnh chân dung
+            type: image
+            description: Có thể để trống và tải ảnh của bạn lên sau. Ảnh dọc tỷ lệ 4:5 sẽ đẹp nhất.
+            options:
+              media: portfolio_images
+              extensions: [jpg, jpeg, png, webp]
+              rename: safe
+          - name: alt
+            label: Mô tả ảnh
+            type: string
+            description: Dùng cho khả năng truy cập và công cụ tìm kiếm.
 
       - name: expertise
         label: Kỹ năng
@@ -189,6 +212,11 @@ content:
           - { name: backTop, label: Nút lên đầu trang, type: string, required: true }
           - { name: all, label: Bộ lọc tất cả, type: string, required: true }
           - { name: watch, label: Nhãn xem YouTube, type: string, required: true }
+          - { name: viewsShort, label: Nhãn lượt xem ngắn, type: string, required: true }
+          - { name: performanceLabel, label: Nhãn hiệu suất video, type: string, required: true }
+          - { name: viewsLabel, label: Nhãn lượt xem công khai, type: string, required: true }
+          - { name: rankLabel, label: Nhãn xếp hạng, type: string, required: true }
+          - { name: shareLabel, label: Nhãn tỷ trọng lượt xem, type: string, required: true }
           - { name: github, label: Nhãn GitHub, type: string, required: true }
           - { name: email, label: Nhãn Email, type: string, required: true }
           - { name: linkedin, label: Nhãn LinkedIn, type: string, required: true }
@@ -230,6 +258,11 @@ content:
           - { name: backTop, label: Nút lên đầu trang, type: string, required: true }
           - { name: all, label: Bộ lọc tất cả, type: string, required: true }
           - { name: watch, label: Nhãn xem YouTube, type: string, required: true }
+          - { name: viewsShort, label: Nhãn lượt xem ngắn, type: string, required: true }
+          - { name: performanceLabel, label: Nhãn hiệu suất video, type: string, required: true }
+          - { name: viewsLabel, label: Nhãn lượt xem công khai, type: string, required: true }
+          - { name: rankLabel, label: Nhãn xếp hạng, type: string, required: true }
+          - { name: shareLabel, label: Nhãn tỷ trọng lượt xem, type: string, required: true }
           - { name: github, label: Nhãn GitHub, type: string, required: true }
           - { name: email, label: Nhãn Email, type: string, required: true }
           - { name: linkedin, label: Nhãn LinkedIn, type: string, required: true }
