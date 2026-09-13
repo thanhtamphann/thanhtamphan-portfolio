@@ -37,8 +37,9 @@ content:
             required: true
 
       - name: projects
-        label: Video tiêu biểu
+        label: Video tiêu biểu — có thể thêm, xóa và sắp xếp
         type: object
+        description: Dùng nút thêm mục để tạo video mới. Kéo thả để đổi thứ tự hiển thị.
         list:
           min: 1
           collapsible:
@@ -49,11 +50,14 @@ content:
             label: Chủ đề / bộ lọc
             type: string
             required: true
-          - name: videoId
-            label: YouTube Video ID
+          - name: videoUrl
+            label: Link video YouTube
             type: string
-            required: true
-            description: Phần ký tự nằm sau watch?v= trong link YouTube.
+            description: Chỉ cần dán toàn bộ đường dẫn YouTube. Website sẽ tự lấy thumbnail.
+          - name: videoId
+            label: YouTube Video ID (dự phòng)
+            type: string
+            description: Video cũ đang dùng ID. Khi thêm video mới, bạn có thể chỉ điền Link video YouTube ở trên.
           - name: image
             label: Ảnh tùy chỉnh (không bắt buộc)
             type: image
@@ -70,16 +74,14 @@ content:
             label: Lượt xem công khai
             type: string
             required: true
-          - name: rank
-            label: Xếp hạng theo lượt xem
+          - name: likes
+            label: Lượt thích công khai (không bắt buộc)
             type: string
-            required: true
-            description: Ví dụ #1, #2, #3 trong danh sách video tiêu biểu.
-          - name: share
-            label: Tỷ trọng trong tổng lượt xem
+            description: Ví dụ 26.7K. Nếu có số này, website sẽ ưu tiên hiển thị Likes.
+          - name: averageViews
+            label: View trung bình ước tính
             type: string
-            required: true
-            description: Ví dụ 22.7%.
+            description: Không bắt buộc. View trung bình của các video tiêu biểu trong cùng nhóm nội dung.
           - name: en
             label: Mô tả tiếng Anh
             type: text
@@ -215,8 +217,8 @@ content:
           - { name: viewsShort, label: Nhãn lượt xem ngắn, type: string, required: true }
           - { name: performanceLabel, label: Nhãn hiệu suất video, type: string, required: true }
           - { name: viewsLabel, label: Nhãn lượt xem công khai, type: string, required: true }
-          - { name: rankLabel, label: Nhãn xếp hạng, type: string, required: true }
-          - { name: shareLabel, label: Nhãn tỷ trọng lượt xem, type: string, required: true }
+          - { name: likesLabel, label: Nhãn lượt thích, type: string, required: true }
+          - { name: averageViewsLabel, label: Nhãn view trung bình, type: string, required: true }
           - { name: github, label: Nhãn GitHub, type: string, required: true }
           - { name: email, label: Nhãn Email, type: string, required: true }
           - { name: linkedin, label: Nhãn LinkedIn, type: string, required: true }
@@ -261,8 +263,8 @@ content:
           - { name: viewsShort, label: Nhãn lượt xem ngắn, type: string, required: true }
           - { name: performanceLabel, label: Nhãn hiệu suất video, type: string, required: true }
           - { name: viewsLabel, label: Nhãn lượt xem công khai, type: string, required: true }
-          - { name: rankLabel, label: Nhãn xếp hạng, type: string, required: true }
-          - { name: shareLabel, label: Nhãn tỷ trọng lượt xem, type: string, required: true }
+          - { name: likesLabel, label: Nhãn lượt thích, type: string, required: true }
+          - { name: averageViewsLabel, label: Nhãn view trung bình, type: string, required: true }
           - { name: github, label: Nhãn GitHub, type: string, required: true }
           - { name: email, label: Nhãn Email, type: string, required: true }
           - { name: linkedin, label: Nhãn LinkedIn, type: string, required: true }
