@@ -144,6 +144,14 @@ function telegramHandle() {
   return (data.contact?.telegram || "").replace(/^@/, "").trim();
 }
 
+function socialContactItems() {
+  return [
+    { key: "instagram", label: "Instagram" },
+    { key: "facebook", label: "Facebook" },
+    { key: "tiktok", label: "TikTok" }
+  ];
+}
+
 function renderHeroContact() {
   const container = document.querySelector("#hero-contact");
   if (!container) return;
@@ -155,6 +163,14 @@ function renderHeroContact() {
   if (handle) {
     links.push(`<a href="https://t.me/${handle}" target="_blank" rel="noreferrer">Telegram · @${handle}</a>`);
   }
+  socialContactItems().forEach(({ key, label }) => {
+    const url = (data.contact?.[key] || "").trim();
+    if (url) {
+      links.push(`<a href="${url}" target="_blank" rel="noreferrer">${label}</a>`);
+    } else {
+      links.push(`<span aria-disabled="true" title="Add link in Pages CMS" style="display:inline-flex;align-items:center;padding:10px 14px;border:1px dashed rgba(17,17,15,.28);border-radius:999px;font-family:'DM Mono',monospace;font-size:.67rem;opacity:.55">${label}</span>`);
+    }
+  });
   container.innerHTML = links.join("");
 }
 
@@ -165,7 +181,14 @@ function renderContact() {
   const handle = telegramHandle();
   if (handle) links.push({ label: "Telegram", url: `https://t.me/${handle}` });
   if (data.contact?.linkedin) links.push({ label: t("linkedin"), url: data.contact.linkedin });
-  document.querySelector("#contact-links").innerHTML = links.map((link) => `<a class="contact-link" href="${link.url}" target="_blank" rel="noreferrer"><span>${link.label}</span><span>↗</span></a>`).join("");
+  socialContactItems().forEach(({ key, label }) => {
+    const url = (data.contact?.[key] || "").trim();
+    links.push({ label, url, placeholder: !url });
+  });
+  document.querySelector("#contact-links").innerHTML = links.map((link) => link.placeholder
+    ? `<span class="contact-link" aria-disabled="true" title="Add link in Pages CMS" style="opacity:.5;border-style:dashed"><span>${link.label}</span><span>+</span></span>`
+    : `<a class="contact-link" href="${link.url}" target="_blank" rel="noreferrer"><span>${link.label}</span><span>↗</span></a>`
+  ).join("");
 }
 
 function activateReveal() {
