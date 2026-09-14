@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "enabled": true,
+      "order": 1,
+      "labelEn": "History · 3.4M views",
+      "labelVi": "Lịch sử · 3,4 triệu lượt xem",
+      "titleEn": "Turn a broad historical question into an irresistible everyday mystery.",
+      "titleVi": "Biến một câu hỏi lịch sử rất rộng thành câu chuyện đời thường khiến người xem tò mò.",
+      "bodyEn": "Start with a simple human question, research specific routines and constraints, then escalate through vivid details and reveals instead of presenting history as a lecture.",
+      "bodyVi": "Bắt đầu từ một câu hỏi gần gũi, sau đó đi vào thói quen, giới hạn và những chi tiết cụ thể để quá khứ trở nên sống động hơn."
+    },
+    {
+      "enabled": true,
+      "order": 2,
+      "labelEn": "Psychology · 2.3M views",
+      "labelVi": "Tâm lý · 2,3 triệu lượt xem",
+      "titleEn": "Translate psychology into a story viewers recognize in themselves.",
+      "titleVi": "Bắt đầu từ một cảm giác quen thuộc rồi mới dẫn người xem vào phần tâm lý học.",
+      "bodyEn": "Begin with an emotionally familiar behavior, build curiosity around why it happens, and turn research into clear conversational explanations.",
+      "bodyVi": "Đi từ một hành vi nhiều người từng trải qua, sau đó mới giải thích vì sao chúng ta phản ứng như vậy bằng ngôn ngữ gần gũi."
+    },
+    {
+      "enabled": true,
+      "order": 3,
+      "labelEn": "Travel · 1.7M views",
+      "labelVi": "Du lịch · 1,7 triệu lượt xem",
+      "titleEn": "Use contrast to make a familiar destination feel undiscovered.",
+      "titleVi": "Kể về một nơi quen thuộc theo cách khiến người xem thấy mình vẫn còn nhiều điều chưa biết.",
+      "bodyEn": "Move through cultural contrasts, unexpected details and human observations to create discovery and visual momentum.",
+      "bodyVi": "Ưu tiên những tương phản về văn hóa, đời sống và con người để mỗi phần đều mở ra một góc nhìn mới."
+    }
+  ]
+}
