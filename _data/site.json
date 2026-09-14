@@ -1,0 +1,69 @@
+{
+  "siteTitle": "Thanh Tam Phan",
+  "siteTagline": "Content Strategist · YouTube Scriptwriter · Researcher",
+  "siteDescription": "Content strategist, YouTube scriptwriter and researcher crafting high-retention stories for international audiences.",
+  "defaultLanguage": "en",
+  "logoText": "TTP",
+  "favicon": "",
+  "ogImage": "",
+  "theme": "original",
+  "colors": {
+    "paper": "#f0eee8",
+    "paperSoft": "#e5e1d7",
+    "ink": "#11110f",
+    "acid": "#d7ff3f",
+    "coral": "#ff6b4a",
+    "blue": "#536dff"
+  },
+  "announcement": {
+    "enabled": false,
+    "textEn": "Available for select remote content and creative opportunities",
+    "textVi": "Sẵn sàng cho một số cơ hội remote về nội dung và sáng tạo",
+    "url": "",
+    "newTab": false
+  },
+  "contact": {
+    "github": "https://github.com/thanhtamphann",
+    "email": "thanhtamphannforwork@gmail.com",
+    "telegram": "thanhtamphann",
+    "linkedin": "",
+    "instagram": "",
+    "facebook": "",
+    "tiktok": ""
+  },
+  "cta": {
+    "primaryEnabled": true,
+    "primaryLabelEn": "Work with me",
+    "primaryLabelVi": "Liên hệ hợp tác",
+    "primaryUrl": "#contact",
+    "secondaryEnabled": true,
+    "secondaryLabelEn": "Read the blog",
+    "secondaryLabelVi": "Đọc blog",
+    "secondaryUrl": "blog.html"
+  },
+  "navigation": [
+    {"labelEn":"Work","labelVi":"Dự án","url":"#work","enabled":true,"newTab":false},
+    {"labelEn":"Expertise","labelVi":"Thế mạnh","url":"#expertise","enabled":true,"newTab":false},
+    {"labelEn":"Process","labelVi":"Quy trình","url":"#process","enabled":true,"newTab":false},
+    {"labelEn":"Blog","labelVi":"Blog","url":"blog.html","enabled":true,"newTab":false},
+    {"labelEn":"Contact","labelVi":"Liên hệ","url":"#contact","enabled":true,"newTab":false}
+  ],
+  "sections": [
+    {"id":"hero","enabled":true},
+    {"id":"results","enabled":true},
+    {"id":"stats","enabled":true},
+    {"id":"work","enabled":true},
+    {"id":"case-studies","enabled":true},
+    {"id":"expertise","enabled":true},
+    {"id":"tools","enabled":true},
+    {"id":"manifesto","enabled":true},
+    {"id":"process","enabled":true},
+    {"id":"about","enabled":true},
+    {"id":"contact","enabled":true}
+  ],
+  "seo": {
+    "title": "Thanh Tam Phan — Content Strategist & YouTube Scriptwriter",
+    "description": "Research-led strategy, YouTube scriptwriting and storytelling for international audiences.",
+    "socialImage": ""
+  }
+}
