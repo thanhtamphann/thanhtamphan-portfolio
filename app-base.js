@@ -85,9 +85,7 @@ function renderProjects() {
     const youtubeImage = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
     const image = project.image || youtubeImage;
     const fallback = project.image ? youtubeImage : `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-    const secondaryMetric = project.likes || project.averageViews;
-    const secondaryLabel = project.likes ? t("likesLabel") : t("averageViewsLabel");
-    const secondaryMarkup = secondaryMetric ? `<div><strong>${secondaryMetric}</strong><span>${secondaryLabel}</span></div>` : "";
+    const likesMarkup = project.likes ? `<div><strong>${project.likes}</strong><span>${t("likesLabel")}</span></div>` : "";
 
     return `
       <article class="project-card reveal visible">
@@ -100,7 +98,7 @@ function renderProjects() {
         <p>${project[language]}</p>
         <div class="project-performance" aria-label="${t("performanceLabel")}">
           <div><strong>${project.views}</strong><span>${t("viewsLabel")}</span></div>
-          ${secondaryMarkup}
+          ${likesMarkup}
         </div>
       </article>`;
   }).join("");
