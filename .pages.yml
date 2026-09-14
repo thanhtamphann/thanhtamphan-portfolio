@@ -69,7 +69,7 @@ content:
       - name: contact
         label: Liên hệ & mạng xã hội
         type: object
-        description: Đây là nguồn duy nhất cho Hero và Contact. Không có trường số điện thoại.
+        description: Nguồn duy nhất cho Hero, Contact và các trang dùng chung. Không có trường số điện thoại.
         fields:
           - { name: github, label: Link GitHub, type: string }
           - { name: email, label: Email công việc, type: string }
@@ -234,15 +234,6 @@ content:
           - { name: caseTitle, label: Case study — tiêu đề dòng 1, type: string }
           - { name: caseTitleEm, label: Case study — dòng nhấn, type: string }
           - { name: caseNote, label: Case study — mô tả chung, type: text }
-          - { name: case1Label, label: Case 1 — nhãn, type: string }
-          - { name: case1Title, label: Case 1 — tiêu đề, type: text }
-          - { name: case1Body, label: Case 1 — nội dung, type: text }
-          - { name: case2Label, label: Case 2 — nhãn, type: string }
-          - { name: case2Title, label: Case 2 — tiêu đề, type: text }
-          - { name: case2Body, label: Case 2 — nội dung, type: text }
-          - { name: case3Label, label: Case 3 — nhãn, type: string }
-          - { name: case3Title, label: Case 3 — tiêu đề, type: text }
-          - { name: case3Body, label: Case 3 — nội dung, type: text }
           - { name: expertiseEyebrow, label: Thế mạnh — nhãn, type: string }
           - { name: expertiseTitle, label: Thế mạnh — dòng 1, type: string }
           - { name: expertiseTitleEm, label: Thế mạnh — dòng nhấn, type: string }
@@ -315,15 +306,6 @@ content:
           - { name: caseTitle, label: Phân tích dự án — dòng 1, type: string }
           - { name: caseTitleEm, label: Phân tích dự án — dòng nhấn, type: string }
           - { name: caseNote, label: Phân tích dự án — mô tả chung, type: text }
-          - { name: case1Label, label: Case 1 — nhãn, type: string }
-          - { name: case1Title, label: Case 1 — tiêu đề, type: text }
-          - { name: case1Body, label: Case 1 — nội dung, type: text }
-          - { name: case2Label, label: Case 2 — nhãn, type: string }
-          - { name: case2Title, label: Case 2 — tiêu đề, type: text }
-          - { name: case2Body, label: Case 2 — nội dung, type: text }
-          - { name: case3Label, label: Case 3 — nhãn, type: string }
-          - { name: case3Title, label: Case 3 — tiêu đề, type: text }
-          - { name: case3Body, label: Case 3 — nội dung, type: text }
           - { name: expertiseEyebrow, label: Thế mạnh — nhãn, type: string }
           - { name: expertiseTitle, label: Thế mạnh — dòng 1, type: string }
           - { name: expertiseTitleEm, label: Thế mạnh — dòng nhấn, type: string }
@@ -367,7 +349,7 @@ content:
           - { name: performanceLabel, label: Nhãn hiệu suất, type: string }
           - { name: viewsLabel, label: Nhãn lượt xem, type: string }
           - { name: likesLabel, label: Nhãn lượt thích, type: string }
-          - { name: averageViewsLabel, label: Nhãn view trung bình, type: string }
+          - { name: averageViewsLabel, label: Nhãn view trung bình ước tính, type: string }
           - { name: github, label: Nhãn GitHub, type: string }
           - { name: email, label: Nhãn Email, type: string }
           - { name: linkedin, label: Nhãn LinkedIn, type: string }
@@ -388,8 +370,31 @@ content:
       - { name: hoverEffects, label: Hiệu ứng khi rê chuột, type: boolean }
       - { name: statAnimation, label: Hiệu ứng số liệu, type: boolean }
 
+  - name: cases
+    label: 04. Case Studies — thêm, xóa & sắp xếp
+    type: file
+    path: content/cases.json
+    format: json
+    fields:
+      - name: items
+        label: Danh sách Case Studies
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{labelEn} ({index})"
+        fields:
+          - { name: enabled, label: Hiển thị, type: boolean, default: true }
+          - { name: order, label: Thứ tự, type: number }
+          - { name: labelEn, label: Nhãn — English, type: string, required: true }
+          - { name: labelVi, label: Nhãn — Tiếng Việt, type: string, required: true }
+          - { name: titleEn, label: Tiêu đề — English, type: text, required: true }
+          - { name: titleVi, label: Tiêu đề — Tiếng Việt, type: text, required: true }
+          - { name: bodyEn, label: Nội dung — English, type: text, required: true }
+          - { name: bodyVi, label: Nội dung — Tiếng Việt, type: text, required: true }
+
   - name: blog
-    label: 04. Blog — thêm, sửa và xóa bài
+    label: 05. Blog — thêm, sửa và xóa bài
     type: collection
     path: _posts
     filename: "{year}-{month}-{day}-{title}.md"
