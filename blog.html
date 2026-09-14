@@ -1,0 +1,37 @@
+---
+layout: null
+title: Blog
+---
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blog — Thanh Tam Phan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/blog.css?v=20260914-2' | relative_url }}">
+</head>
+<body>
+<header class="blog-header"><a class="brand" href="{{ '/' | relative_url }}">TTP</a><nav><a href="{{ '/' | relative_url }}">Portfolio</a><a class="active" href="{{ '/blog.html' | relative_url }}">Blog</a></nav></header>
+<main>
+<section class="blog-hero"><p class="eyebrow">Writing / Notes</p><h1>Ghi chép về Content, Storytelling & YouTube</h1><p>Những ghi chép thực tế về nghiên cứu, viết nội dung và xây câu chuyện cho khán giả quốc tế.</p></section>
+<section class="blog-controls"><div id="blog-filters" class="blog-filters"><button class="blog-filter active" data-category="all">Tất cả</button></div></section>
+<section class="blog-grid" id="blog-grid">
+{% for post in site.posts %}
+{% assign words = post.content | number_of_words %}{% assign mins = words | divided_by: 200 | plus: 1 %}
+<article class="blog-card accent-{{ post.accent | default: 'coral' }}" data-category="{{ post.category | escape }}">
+<a href="{{ post.url | relative_url }}">
+<div class="blog-card-top"><span>{{ post.category }}</span><span>{{ post.date | date: '%d.%m.%Y' }} · {{ mins }} min read</span></div>
+{% if post.cover %}<img class="blog-cover" src="{{ post.cover | relative_url }}" alt="">{% endif %}
+<h2>{{ post.title }}</h2><p>{{ post.excerpt }}</p><span class="read-link">Đọc bài ↗</span>
+</a></article>
+{% endfor %}
+</section>
+</main>
+<footer><span>© {{ 'now' | date: '%Y' }} Thanh Tam Phan</span><a href="{{ '/' | relative_url }}">Back to portfolio ↗</a></footer>
+<script>
+const cards=[...document.querySelectorAll('.blog-card')],box=document.querySelector('#blog-filters');
+[...new Set(cards.map(c=>c.dataset.category).filter(Boolean))].forEach(cat=>{const b=document.createElement('button');b.className='blog-filter';b.dataset.category=cat;b.textContent=cat;box.appendChild(b)});
+box.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;box.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');cards.forEach(c=>c.hidden=b.dataset.category!=='all'&&c.dataset.category!==b.dataset.category)});
+</script>
+</body></html>

@@ -1,0 +1,5 @@
+title: Thanh Tam Phan
+url: https://thanhtamphann.github.io
+baseurl: /thanhtamphan-portfolio
+permalink: /blog/:title/
+markdown: kramdown

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ page.title }} — Thanh Tam Phan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/blog.css?v=20260914-2' | relative_url }}">
+</head>
+<body>
+<header class="blog-header"><a class="brand" href="{{ '/' | relative_url }}">TTP</a><nav><a href="{{ '/' | relative_url }}">Portfolio</a><a class="active" href="{{ '/blog.html' | relative_url }}">Blog</a></nav></header>
+{% assign words = content | number_of_words %}{% assign mins = words | divided_by: 200 | plus: 1 %}
+<main class="post-shell"><article class="post-article accent-{{ page.accent | default: 'coral' }}">
+<header class="post-hero"><a class="back-blog" href="{{ '/blog.html' | relative_url }}">← Blog</a><div class="post-meta"><span>{{ page.category }}</span><span>{{ page.date | date: '%d.%m.%Y' }} · {{ mins }} min read</span></div><h1>{{ page.title }}</h1><p>{{ page.excerpt }}</p>{% if page.cover %}<img class="post-cover" src="{{ page.cover | relative_url }}" alt="">{% endif %}</header>
+<div class="post-body">{{ content }}</div></article></main>
+<footer><span>© {{ 'now' | date: '%Y' }} Thanh Tam Phan</span><a href="{{ '/blog.html' | relative_url }}">← All posts</a></footer>
+</body></html>
