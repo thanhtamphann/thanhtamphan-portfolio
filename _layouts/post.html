@@ -1,19 +1,29 @@
+{% assign s = site.data.site %}
 <!doctype html>
-<html lang="vi">
+<html lang="{{ s.defaultLanguage | default: 'en' }}">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{{ page.title }} — Thanh Tam Phan</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311110f'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Georgia' font-size='23' font-weight='700' fill='%23f0eee8'%3ETTP%3C/text%3E%3Ccircle cx='50' cy='14' r='5' fill='%23c9ff3d'/%3E%3C/svg%3E">
+<title>{{ page.seoTitle | default: page.title }} — {{ s.siteTitle | default: 'Thanh Tam Phan' }}</title>
+<meta name="description" content="{{ page.seoDescription | default: page.excerpt | escape }}">
+<meta property="og:title" content="{{ page.seoTitle | default: page.title | escape }}"><meta property="og:description" content="{{ page.seoDescription | default: page.excerpt | escape }}">
+{% if page.socialImage %}<meta property="og:image" content="{{ page.socialImage | absolute_url }}">{% elsif page.cover %}<meta property="og:image" content="{{ page.cover | absolute_url }}">{% elsif s.seo.socialImage %}<meta property="og:image" content="{{ s.seo.socialImage | absolute_url }}">{% endif %}
+{% if s.favicon %}<link rel="icon" href="{{ s.favicon | relative_url }}">{% else %}<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311110f'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Georgia' font-size='23' font-weight='700' fill='%23f0eee8'%3E{{ s.logoText | default: 'TTP' }}%3C/text%3E%3Ccircle cx='50' cy='14' r='5' fill='%23d7ff3f'/%3E%3C/svg%3E">{% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ '/blog.css?v=20260914-2' | relative_url }}">
+<link rel="stylesheet" href="{{ '/blog.css?v=20260914-3' | relative_url }}">
+<style>:root{--ink:{{ s.colors.ink | default: '#11110f' }};--paper:{{ s.colors.paper | default: '#f0eee8' }};--paper-soft:{{ s.colors.paperSoft | default: '#e5e1d7' }};--acid:{{ s.colors.acid | default: '#d7ff3f' }};--coral:{{ s.colors.coral | default: '#ff6b4a' }};--blue:{{ s.colors.blue | default: '#536dff' }}}.reading-progress{position:fixed;z-index:100;top:0;left:0;height:3px;width:0;background:var(--coral)}.post-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.post-tag{padding:6px 9px;border:1px solid currentColor;border-radius:999px;font-size:.65rem}.toc{max-width:820px;margin:40px auto 0;padding:0 24px}.toc:empty{display:none}.toc h2{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}.toc a{display:block;padding:7px 0;border-bottom:1px solid rgba(17,17,15,.12);font-size:.9rem}.toc a.sub{padding-left:18px;opacity:.7}.related-posts{max-width:1100px;margin:0 auto 90px;padding:40px 24px 0;border-top:1px solid rgba(17,17,15,.18)}.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.related-card{padding:18px;border:1px solid rgba(17,17,15,.16)}.related-card span{font-size:.67rem;text-transform:uppercase;opacity:.6}.related-card h3{margin:15px 0 0;font-size:1.25rem}@media(max-width:720px){.related-grid{grid-template-columns:1fr}}</style>
 </head>
-<body>
-<header class="blog-header"><a class="brand" href="{{ '/' | relative_url }}">TTP</a><nav><a href="{{ '/' | relative_url }}">Portfolio</a><a class="active" href="{{ '/blog.html' | relative_url }}">Blog</a></nav></header>
+<body data-theme="{{ s.theme | default: 'original' }}">
+<div class="reading-progress" id="reading-progress"></div>
+<header class="blog-header"><a class="brand" href="{{ '/' | relative_url }}">{{ s.logoText | default: 'TTP' }}</a><nav>{% for item in s.navigation %}{% if item.enabled %}<a href="{{ item.url | relative_url }}" {% if item.newTab %}target="_blank" rel="noreferrer"{% endif %}>{{ item.labelVi | default: item.labelEn }}</a>{% endif %}{% endfor %}</nav></header>
 {% assign words = content | number_of_words %}{% assign mins = words | divided_by: 200 | plus: 1 %}
 <main class="post-shell"><article class="post-article accent-{{ page.accent | default: 'coral' }}">
-<header class="post-hero"><a class="back-blog" href="{{ '/blog.html' | relative_url }}">← Blog</a><div class="post-meta"><span>{{ page.category }}</span><span>{{ page.date | date: '%d.%m.%Y' }} · {{ mins }} min read</span></div><h1>{{ page.title }}</h1><p>{{ page.excerpt }}</p>{% if page.cover %}<img class="post-cover" src="{{ page.cover | relative_url }}" alt="">{% endif %}</header>
-<div class="post-body">{{ content }}</div></article></main>
-<footer><span>© {{ 'now' | date: '%Y' }} Thanh Tam Phan</span><a href="{{ '/blog.html' | relative_url }}">← All posts</a></footer>
-<script src="{{ '/branding.js?v=20260914-2' | relative_url }}"></script>
+<header class="post-hero"><a class="back-blog" href="{{ '/blog.html' | relative_url }}">← Blog</a><div class="post-meta"><span>{{ page.category }}</span><span>{{ page.date | date: '%d.%m.%Y' }} · {{ mins }} min read</span></div><h1>{{ page.title }}</h1><p>{{ page.excerpt }}</p>{% if page.tags %}<div class="post-tags">{% for tag in page.tags %}<span class="post-tag">{{ tag }}</span>{% endfor %}</div>{% endif %}{% if page.cover %}<img class="post-cover" src="{{ page.cover | relative_url }}" alt="">{% endif %}</header>
+<nav class="toc" id="toc"><h2>Mục lục</h2></nav><div class="post-body" id="post-body">{{ content }}</div></article></main>
+{% assign related = site.posts | where: 'category', page.category %}<section class="related-posts"><p class="eyebrow">Related posts</p><div class="related-grid">{% assign shown = 0 %}{% for post in related %}{% if post.url != page.url and shown < 3 %}<a class="related-card" href="{{ post.url | relative_url }}"><span>{{ post.category }} · {{ post.date | date: '%d.%m.%Y' }}</span><h3>{{ post.title }}</h3></a>{% assign shown = shown | plus: 1 %}{% endif %}{% endfor %}</div></section>
+<footer><span>© {{ 'now' | date: '%Y' }} {{ s.siteTitle | default: 'Thanh Tam Phan' }}</span><a href="{{ '/blog.html' | relative_url }}">← All posts</a></footer>
+<script>
+const body=document.querySelector('#post-body'),toc=document.querySelector('#toc'),headings=[...body.querySelectorAll('h2,h3')];headings.forEach((h,i)=>{if(!h.id)h.id='section-'+(i+1);const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;a.className=h.tagName==='H3'?'sub':'';toc.appendChild(a)});if(!headings.length)toc.remove();
+const bar=document.querySelector('#reading-progress');function progress(){const max=document.documentElement.scrollHeight-innerHeight;bar.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%'}addEventListener('scroll',progress,{passive:true});progress();
+</script>
 </body></html>
