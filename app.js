@@ -27,6 +27,15 @@
     document.head.appendChild(style);
   }
 
+  document.querySelectorAll('.desktop-nav,.mobile-nav').forEach((nav) => {
+    if (!nav.querySelector('a[href="blog.html"]')) {
+      const link = document.createElement('a');
+      link.href = 'blog.html';
+      link.textContent = 'Blog';
+      nav.appendChild(link);
+    }
+  });
+
   const script = document.createElement('script');
   script.src = 'app-base.js?v=20260914-1';
   document.body.appendChild(script);
