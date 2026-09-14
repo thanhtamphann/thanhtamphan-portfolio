@@ -9,10 +9,10 @@
     });
   }
 
-  await loadScript('site-control.js?v=20260914-1');
+  await loadScript('site-control.js?v=20260914-2');
   if (window.siteSettingsReady) await window.siteSettingsReady;
   await loadScript('branding.js?v=20260914-2');
   await loadScript('motion-settings.js?v=20260914-1');
   await loadScript('app-base.js?v=20260914-2');
-  await loadScript('site-sync.js?v=20260914-1');
+  await loadScript('site-sync.js?v=20260914-2');
 })();
