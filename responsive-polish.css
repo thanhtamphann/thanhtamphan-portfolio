@@ -62,10 +62,10 @@
   .project-meta { align-items: flex-start; flex-direction: column; gap: 5px; margin-top: 14px; }
   .project-card h3 { margin-top: 9px; font-size: clamp(1.55rem, 7.5vw, 2.15rem); }
   .project-card p { font-size: .96rem; }
-  .project-performance { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 18px; }
-  .project-performance div { padding: 0 8px; }
-  .project-performance strong { font-size: clamp(1.18rem, 6vw, 1.55rem); }
-  .project-performance span { font-size: .5rem; overflow-wrap: anywhere; }
+  .project-performance { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin-top: 18px; }
+  .project-performance div { padding: 0 10px; }
+  .project-performance strong { font-size: clamp(1.22rem, 6vw, 1.6rem); }
+  .project-performance span { font-size: .52rem; overflow-wrap: anywhere; }
   .view-badge { left: 10px; bottom: 10px; font-size: .61rem; }
   .play { top: 10px; right: 10px; width: 39px; height: 39px; }
 
