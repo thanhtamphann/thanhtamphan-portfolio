@@ -100,6 +100,9 @@ content:
           - { name: email, label: Email công việc, type: string }
           - { name: telegram, label: Telegram username, type: string }
           - { name: linkedin, label: Link LinkedIn, type: string }
+          - { name: instagram, label: Link Instagram, type: string }
+          - { name: facebook, label: Link Facebook, type: string }
+          - { name: tiktok, label: Link TikTok, type: string }
 
   - name: copy
     label: 02. Toàn bộ chữ trên website
