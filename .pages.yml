@@ -6,6 +6,13 @@ media:
     extensions: [jpg, jpeg, png, webp, gif]
     categories: [image]
     rename: safe
+  - name: blog_images
+    label: Ảnh blog
+    input: assets/blog
+    output: /thanhtamphan-portfolio/assets/blog
+    extensions: [jpg, jpeg, png, webp, gif]
+    categories: [image]
+    rename: safe
 
 content:
   - name: portfolio
@@ -17,62 +24,38 @@ content:
       - name: stats
         label: Các con số nổi bật
         type: object
-        list:
-          min: 1
-          collapsible:
-            collapsed: true
-            summary: "{value} — {vi}"
+        list: true
         fields:
           - { name: value, label: Con số, type: string, required: true }
           - { name: en, label: Chú thích tiếng Anh, type: string, required: true }
           - { name: vi, label: Chú thích tiếng Việt, type: string, required: true }
-
       - name: projects
         label: Video tiêu biểu
         type: object
-        description: Có thể thêm, xóa, kéo thả đổi thứ tự. Khi thêm video mới chỉ cần dán link YouTube, điền tiêu đề và số liệu.
-        list:
-          min: 1
-          collapsible:
-            collapsed: true
-            summary: "{title}"
+        list: true
         fields:
-          - name: category
-            label: Chủ đề / bộ lọc
-            type: select
-            options:
-              values: [Psychology, Travel, History, Science, Self-growth]
-            required: true
+          - { name: category, label: Chủ đề / bộ lọc, type: string, required: true }
           - { name: videoUrl, label: Link video YouTube, type: string }
           - { name: videoId, label: YouTube Video ID, type: string }
           - name: image
             label: Ảnh thumbnail tùy chỉnh
             type: image
-            options:
-              media: portfolio_images
-              extensions: [jpg, jpeg, png, webp, gif]
-              rename: safe
+            options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp, gif], rename: safe }
           - { name: title, label: Tiêu đề video, type: string, required: true }
           - { name: views, label: Lượt xem, type: string, required: true }
           - { name: likes, label: Lượt thích, type: string }
           - { name: averageViews, label: View trung bình ước tính, type: string }
           - { name: en, label: Mô tả tiếng Anh, type: text, required: true }
           - { name: vi, label: Mô tả tiếng Việt, type: text, required: true }
-
       - name: profile
         label: Ảnh cá nhân
         type: object
-        description: Ảnh này dùng cho cả trang đầu và phần Giới thiệu.
         fields:
           - name: image
             label: Tải ảnh chân dung
             type: image
-            options:
-              media: portfolio_images
-              extensions: [jpg, jpeg, png, webp]
-              rename: safe
+            options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
           - { name: alt, label: Mô tả ảnh, type: string }
-
       - name: expertise
         label: Thế mạnh chuyên môn
         type: object
@@ -90,7 +73,6 @@ content:
             fields:
               - { name: en, label: Tiếng Anh, type: text, required: true }
               - { name: vi, label: Tiếng Việt, type: text, required: true }
-
       - name: process
         label: Quy trình làm việc
         type: object
@@ -108,12 +90,7 @@ content:
             fields:
               - { name: en, label: Tiếng Anh, type: text, required: true }
               - { name: vi, label: Tiếng Việt, type: text, required: true }
-
-      - name: tags
-        label: Thẻ chuyên môn ở phần Giới thiệu
-        type: string
-        list: true
-
+      - { name: tags, label: Thẻ chuyên môn ở phần Giới thiệu, type: string, list: true }
       - name: contact
         label: Thông tin liên hệ
         type: object
@@ -211,7 +188,6 @@ content:
           - { name: github, label: Nhãn GitHub, type: string }
           - { name: email, label: Nhãn Email, type: string }
           - { name: linkedin, label: Nhãn LinkedIn, type: string }
-
       - name: vi
         label: Nội dung tiếng Việt
         type: object
@@ -304,9 +280,58 @@ content:
       - name: intensity
         label: Mức độ hiệu ứng
         type: select
-        options:
-          values: [subtle, medium, strong]
+        options: { values: [subtle, medium, strong] }
       - { name: heroText, label: Hiệu ứng chữ ở trang đầu, type: boolean }
       - { name: scrollReveal, label: Hiệu ứng khi cuộn trang, type: boolean }
       - { name: hoverEffects, label: Hiệu ứng khi rê chuột, type: boolean }
       - { name: statAnimation, label: Hiệu ứng số liệu, type: boolean }
+
+  - name: blog
+    label: 04. Blog — thêm, sửa và xóa bài
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{title}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, category, accent]
+      primary: title
+      search: [title, category, excerpt]
+    fields:
+      - { name: layout, label: false, type: string, hidden: true, default: post }
+      - { name: title, label: Tiêu đề bài viết, type: string, required: true }
+      - name: category
+        label: Chủ đề
+        type: string
+        required: true
+        description: Gõ chủ đề mới tùy ý. Website tự tạo bộ lọc mới từ chủ đề này.
+      - name: accent
+        label: Màu bài viết
+        type: select
+        default: coral
+        options:
+          values:
+            - { name: coral, label: Coral / Cam }
+            - { name: blue, label: Blue / Xanh }
+            - { name: acid, label: Acid / Xanh neon }
+            - { name: lavender, label: Lavender / Tím nhạt }
+            - { name: pink, label: Pink / Hồng }
+            - { name: mint, label: Mint / Xanh mint }
+            - { name: sand, label: Sand / Be }
+            - { name: ink, label: Ink / Đen }
+      - { name: excerpt, label: Mô tả ngắn, type: text, required: true }
+      - name: cover
+        label: Ảnh cover
+        type: image
+        options: { media: blog_images, extensions: [jpg, jpeg, png, webp, gif], rename: safe }
+      - name: body
+        label: Nội dung bài viết
+        type: rich-text
+        required: true
+        description: Có thể định dạng chữ và chèn ảnh trực tiếp giữa bài.
+        options:
+          format: markdown
+          media: blog_images
+          path: assets/blog
+          extensions: [jpg, jpeg, png, webp, gif]
+          rename: safe
+          switcher: true
