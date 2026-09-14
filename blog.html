@@ -2,39 +2,40 @@
 layout: null
 title: Blog
 ---
+{% assign s = site.data.site %}
 <!doctype html>
-<html lang="vi">
+<html lang="{{ s.defaultLanguage | default: 'en' }}">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Blog — Thanh Tam Phan</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311110f'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Georgia' font-size='23' font-weight='700' fill='%23f0eee8'%3ETTP%3C/text%3E%3Ccircle cx='50' cy='14' r='5' fill='%23c9ff3d'/%3E%3C/svg%3E">
+<title>Blog — {{ s.siteTitle | default: 'Thanh Tam Phan' }}</title>
+<meta name="description" content="{{ s.siteDescription | escape }}">
+<meta property="og:title" content="Blog — {{ s.siteTitle | escape }}"><meta property="og:description" content="{{ s.siteDescription | escape }}">
+{% if s.seo.socialImage %}<meta property="og:image" content="{{ s.seo.socialImage | absolute_url }}">{% elsif s.ogImage %}<meta property="og:image" content="{{ s.ogImage | absolute_url }}">{% endif %}
+{% if s.favicon %}<link rel="icon" href="{{ s.favicon | relative_url }}">{% else %}<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311110f'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Georgia' font-size='23' font-weight='700' fill='%23f0eee8'%3E{{ s.logoText | default: 'TTP' }}%3C/text%3E%3Ccircle cx='50' cy='14' r='5' fill='%23d7ff3f'/%3E%3C/svg%3E">{% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ '/blog.css?v=20260914-2' | relative_url }}">
+<link rel="stylesheet" href="{{ '/blog.css?v=20260914-3' | relative_url }}">
+<style>:root{--ink:{{ s.colors.ink | default: '#11110f' }};--paper:{{ s.colors.paper | default: '#f0eee8' }};--paper-soft:{{ s.colors.paperSoft | default: '#e5e1d7' }};--acid:{{ s.colors.acid | default: '#d7ff3f' }};--coral:{{ s.colors.coral | default: '#ff6b4a' }};--blue:{{ s.colors.blue | default: '#536dff' }}}.blog-search{min-width:min(100%,340px);padding:10px 14px;border:1px solid rgba(17,17,15,.2);border-radius:999px;background:transparent;font:inherit}.blog-controls{display:flex;gap:18px;justify-content:space-between;align-items:center}.blog-card.is-featured{outline:2px solid var(--ink);outline-offset:-2px}.featured-label{display:inline-block;margin-right:8px;font-weight:700}.blog-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.blog-tag{font-size:.62rem;padding:5px 8px;border:1px solid currentColor;border-radius:999px;opacity:.72}@media(max-width:720px){.blog-controls{align-items:stretch;flex-direction:column}.blog-search{width:100%}}</style>
 </head>
-<body>
-<header class="blog-header"><a class="brand" href="{{ '/' | relative_url }}">TTP</a><nav><a href="{{ '/' | relative_url }}">Portfolio</a><a class="active" href="{{ '/blog.html' | relative_url }}">Blog</a></nav></header>
+<body data-theme="{{ s.theme | default: 'original' }}">
+{% if s.announcement.enabled %}<a class="site-announcement" {% if s.announcement.url %}href="{{ s.announcement.url }}"{% endif %}>{{ s.announcement.textVi | default: s.announcement.textEn }}</a>{% endif %}
+<header class="blog-header"><a class="brand" href="{{ '/' | relative_url }}">{{ s.logoText | default: 'TTP' }}</a><nav>{% for item in s.navigation %}{% if item.enabled %}<a href="{{ item.url | relative_url }}" {% if item.newTab %}target="_blank" rel="noreferrer"{% endif %}>{{ item.labelVi | default: item.labelEn }}</a>{% endif %}{% endfor %}</nav></header>
 <main>
 <section class="blog-hero"><p class="eyebrow">Writing / Notes</p><h1>Ghi chép về Content, Storytelling & YouTube</h1><p>Những ghi chép thực tế về nghiên cứu, viết nội dung và xây câu chuyện cho khán giả quốc tế.</p></section>
-<section class="blog-controls"><div id="blog-filters" class="blog-filters"><button class="blog-filter active" data-category="all">Tất cả</button></div></section>
+<section class="blog-controls"><div id="blog-filters" class="blog-filters"><button class="blog-filter active" data-category="all">Tất cả</button></div><input class="blog-search" id="blog-search" type="search" placeholder="Tìm bài viết..." aria-label="Tìm bài viết"></section>
 <section class="blog-grid" id="blog-grid">
-{% for post in site.posts %}
-{% assign words = post.content | number_of_words %}{% assign mins = words | divided_by: 200 | plus: 1 %}
-<article class="blog-card accent-{{ post.accent | default: 'coral' }}" data-category="{{ post.category | escape }}">
-<a href="{{ post.url | relative_url }}">
-<div class="blog-card-top"><span>{{ post.category }}</span><span>{{ post.date | date: '%d.%m.%Y' }} · {{ mins }} min read</span></div>
-{% if post.cover %}<img class="blog-cover" src="{{ post.cover | relative_url }}" alt="">{% endif %}
-<h2>{{ post.title }}</h2><p>{{ post.excerpt }}</p><span class="read-link">Đọc bài ↗</span>
-</a></article>
-{% endfor %}
+{% for post in site.posts %}{% if post.featured %}{% assign words = post.content | number_of_words %}{% assign mins = words | divided_by: 200 | plus: 1 %}
+<article class="blog-card is-featured accent-{{ post.accent | default: 'coral' }}" data-category="{{ post.category | escape }}" data-search="{{ post.title | append: ' ' | append: post.category | append: ' ' | append: post.tags | downcase | escape }}"><a href="{{ post.url | relative_url }}"><div class="blog-card-top"><span><span class="featured-label">★ Featured</span>{{ post.category }}</span><span>{{ post.date | date: '%d.%m.%Y' }} · {{ mins }} min read</span></div>{% if post.cover %}<img class="blog-cover" src="{{ post.cover | relative_url }}" alt="">{% endif %}<h2>{{ post.title }}</h2><p>{{ post.excerpt }}</p>{% if post.tags %}<div class="blog-tags">{% for tag in post.tags %}<span class="blog-tag">{{ tag }}</span>{% endfor %}</div>{% endif %}<span class="read-link">Đọc bài ↗</span></a></article>{% endif %}{% endfor %}
+{% for post in site.posts %}{% unless post.featured %}{% assign words = post.content | number_of_words %}{% assign mins = words | divided_by: 200 | plus: 1 %}
+<article class="blog-card accent-{{ post.accent | default: 'coral' }}" data-category="{{ post.category | escape }}" data-search="{{ post.title | append: ' ' | append: post.category | append: ' ' | append: post.tags | downcase | escape }}"><a href="{{ post.url | relative_url }}"><div class="blog-card-top"><span>{{ post.category }}</span><span>{{ post.date | date: '%d.%m.%Y' }} · {{ mins }} min read</span></div>{% if post.cover %}<img class="blog-cover" src="{{ post.cover | relative_url }}" alt="">{% endif %}<h2>{{ post.title }}</h2><p>{{ post.excerpt }}</p>{% if post.tags %}<div class="blog-tags">{% for tag in post.tags %}<span class="blog-tag">{{ tag }}</span>{% endfor %}</div>{% endif %}<span class="read-link">Đọc bài ↗</span></a></article>{% endunless %}{% endfor %}
 </section>
 </main>
-<footer><span>© {{ 'now' | date: '%Y' }} Thanh Tam Phan</span><a href="{{ '/' | relative_url }}">Back to portfolio ↗</a></footer>
+<footer><span>© {{ 'now' | date: '%Y' }} {{ s.siteTitle | default: 'Thanh Tam Phan' }}</span><a href="{{ '/' | relative_url }}">Back to portfolio ↗</a></footer>
 <script>
-const cards=[...document.querySelectorAll('.blog-card')],box=document.querySelector('#blog-filters');
+const cards=[...document.querySelectorAll('.blog-card')],box=document.querySelector('#blog-filters'),search=document.querySelector('#blog-search');let active='all';
 [...new Set(cards.map(c=>c.dataset.category).filter(Boolean))].forEach(cat=>{const b=document.createElement('button');b.className='blog-filter';b.dataset.category=cat;b.textContent=cat;box.appendChild(b)});
-box.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;box.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');cards.forEach(c=>c.hidden=b.dataset.category!=='all'&&c.dataset.category!==b.dataset.category)});
+function apply(){const q=(search.value||'').trim().toLowerCase();cards.forEach(c=>{const categoryOk=active==='all'||c.dataset.category===active;const searchOk=!q||(c.dataset.search||'').includes(q);c.hidden=!(categoryOk&&searchOk)})}
+box.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;active=b.dataset.category;box.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));apply()});search.addEventListener('input',apply);
 </script>
-<script src="{{ '/branding.js?v=20260914-2' | relative_url }}"></script>
 </body>
 </html>
