@@ -37,6 +37,6 @@
   });
 
   const script = document.createElement('script');
-  script.src = 'app-base.js?v=20260914-1';
+  script.src = 'app-base.js?v=20260914-2';
   document.body.appendChild(script);
 })();
