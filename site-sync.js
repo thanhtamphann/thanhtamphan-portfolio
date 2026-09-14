@@ -1,4 +1,10 @@
 (() => {
+  let editableCases = [];
+  fetch('content/cases.json', { cache: 'no-store' })
+    .then(response => response.ok ? response.json() : {})
+    .then(payload => { editableCases = payload.items || []; if (window.renderEditableCases) window.renderEditableCases(); })
+    .catch(() => {});
+
   function waitForPortfolio(callback, tries = 0) {
     try {
       if (typeof data !== 'undefined' && data && typeof render === 'function') return callback();
@@ -15,12 +21,14 @@
 
   function applyChrome(settings, currentLanguage) {
     const lang = currentLanguage || 'en';
-    const navItems = (settings.navigation || []).filter(item => item.enabled !== false);
-    const navHtml = navItems.map(item => {
-      const label = lang === 'vi' ? (item.labelVi || item.labelEn) : (item.labelEn || item.labelVi);
-      return `<a href="${item.url}"${item.newTab ? ' target="_blank" rel="noreferrer"' : ''}>${label || ''}</a>`;
-    }).join('');
-    document.querySelectorAll('.desktop-nav,.mobile-nav').forEach(nav => nav.innerHTML = navHtml);
+    if (Array.isArray(settings.navigation) && settings.navigation.length) {
+      const navItems = settings.navigation.filter(item => item.enabled !== false);
+      const navHtml = navItems.map(item => {
+        const label = lang === 'vi' ? (item.labelVi || item.labelEn) : (item.labelEn || item.labelVi);
+        return `<a href="${item.url}"${item.newTab ? ' target="_blank" rel="noreferrer"' : ''}>${label || ''}</a>`;
+      }).join('');
+      document.querySelectorAll('.desktop-nav,.mobile-nav').forEach(nav => nav.innerHTML = navHtml);
+    }
 
     document.querySelector('.site-announcement')?.remove();
     const notice = settings.announcement;
@@ -58,11 +66,11 @@
   }
 
   function renderCases(currentLanguage) {
-    if (!Array.isArray(data.caseStudies)) return;
+    if (!editableCases.length) return;
     const grid = document.querySelector('.case-grid');
     if (!grid) return;
     const lang = currentLanguage || 'en';
-    const cases = data.caseStudies.filter(item => item.enabled !== false).sort((a, b) => (Number(a.order) || 999) - (Number(b.order) || 999));
+    const cases = editableCases.filter(item => item.enabled !== false).sort((a, b) => (Number(a.order) || 999) - (Number(b.order) || 999));
     grid.innerHTML = cases.map(item => `
       <article class="case-card reveal visible">
         <span class="case-label">${lang === 'vi' ? (item.labelVi || item.labelEn) : (item.labelEn || item.labelVi)}</span>
@@ -70,6 +78,9 @@
         <p>${lang === 'vi' ? (item.bodyVi || item.bodyEn) : (item.bodyEn || item.bodyVi)}</p>
       </article>`).join('');
   }
+  window.renderEditableCases = () => {
+    try { renderCases(typeof language !== 'undefined' ? language : (window.siteLanguage || 'en')); } catch (_) {}
+  };
 
   function syncPortfolio() {
     const settings = window.siteSettings || {};
@@ -95,7 +106,6 @@
   };
 
   waitForPortfolio(syncPortfolio);
-
   document.querySelector('.language-toggle')?.addEventListener('click', () => setTimeout(() => {
     try { window.siteLanguage = language; window.refreshSiteChrome(language); } catch (_) {}
   }, 0));
