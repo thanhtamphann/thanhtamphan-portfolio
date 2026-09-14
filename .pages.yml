@@ -338,3 +338,16 @@ content:
           extensions: [jpg, jpeg, png, webp, gif]
           rename: safe
           switcher: true
+
+  - name: site_branding
+    label: 05. Logo website & favicon
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: favicon
+        label: Logo / favicon trên tab trình duyệt
+        type: image
+        description: Upload ảnh vuông PNG, JPG hoặc WEBP. Nếu xóa ảnh này, website tự quay về logo TTP mặc định.
+        options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
+      - { name: faviconAlt, label: Mô tả logo, type: string }
