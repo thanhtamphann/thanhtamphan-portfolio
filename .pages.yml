@@ -1,6 +1,6 @@
 media:
   - name: portfolio_images
-    label: Ảnh portfolio
+    label: Ảnh website & portfolio
     input: assets/images
     output: /thanhtamphan-portfolio/assets/images
     extensions: [jpg, jpeg, png, webp, gif]
@@ -15,8 +15,116 @@ media:
     rename: safe
 
 content:
+  - name: site_control
+    label: 00. Website Control Center
+    type: file
+    path: _data/site.json
+    format: json
+    fields:
+      - { name: siteTitle, label: Tên website, type: string, required: true }
+      - { name: siteTagline, label: Tagline / vai trò, type: string }
+      - { name: siteDescription, label: Mô tả website, type: text }
+      - name: defaultLanguage
+        label: Ngôn ngữ mặc định
+        type: select
+        options: { values: [en, vi] }
+      - { name: logoText, label: Chữ logo mặc định, type: string }
+      - name: favicon
+        label: Favicon / logo trên tab trình duyệt
+        type: image
+        description: Nếu để trống, website dùng favicon TTP mặc định.
+        options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
+      - name: ogImage
+        label: Ảnh chia sẻ mặc định
+        type: image
+        options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
+      - name: theme
+        label: Giao diện mặc định
+        type: select
+        options:
+          values:
+            - { name: original, label: Original / Bản hiện tại }
+            - { name: minimal, label: Minimal }
+            - { name: dark, label: Dark }
+      - name: colors
+        label: Màu toàn website
+        type: object
+        description: Nhập mã HEX, ví dụ #f0eee8. Để giữ màu hiện tại thì không cần đổi.
+        fields:
+          - { name: paper, label: Nền chính, type: string }
+          - { name: paperSoft, label: Nền phụ, type: string }
+          - { name: ink, label: Màu chữ / đen, type: string }
+          - { name: acid, label: Acid green, type: string }
+          - { name: coral, label: Coral, type: string }
+          - { name: blue, label: Blue, type: string }
+      - name: announcement
+        label: Thanh thông báo đầu trang
+        type: object
+        fields:
+          - { name: enabled, label: Bật thanh thông báo, type: boolean }
+          - { name: textEn, label: Nội dung tiếng Anh, type: string }
+          - { name: textVi, label: Nội dung tiếng Việt, type: string }
+          - { name: url, label: Link khi bấm, type: string }
+          - { name: newTab, label: Mở tab mới, type: boolean }
+      - name: contact
+        label: Liên hệ & mạng xã hội
+        type: object
+        description: Đây là nguồn duy nhất cho Hero và Contact. Không có trường số điện thoại.
+        fields:
+          - { name: github, label: Link GitHub, type: string }
+          - { name: email, label: Email công việc, type: string }
+          - { name: telegram, label: Telegram username, type: string }
+          - { name: linkedin, label: Link LinkedIn, type: string }
+          - { name: instagram, label: Link Instagram, type: string }
+          - { name: facebook, label: Link Facebook, type: string }
+          - { name: tiktok, label: Link TikTok, type: string }
+      - name: cta
+        label: Nút CTA ở Hero
+        type: object
+        fields:
+          - { name: primaryEnabled, label: Bật nút chính, type: boolean }
+          - { name: primaryLabelEn, label: Nút chính — English, type: string }
+          - { name: primaryLabelVi, label: Nút chính — Tiếng Việt, type: string }
+          - { name: primaryUrl, label: Nút chính — Link, type: string }
+          - { name: secondaryEnabled, label: Bật nút phụ, type: boolean }
+          - { name: secondaryLabelEn, label: Nút phụ — English, type: string }
+          - { name: secondaryLabelVi, label: Nút phụ — Tiếng Việt, type: string }
+          - { name: secondaryUrl, label: Nút phụ — Link, type: string }
+      - name: navigation
+        label: Menu website
+        type: object
+        list: true
+        description: Thêm, xóa hoặc đổi thứ tự menu tại đây.
+        fields:
+          - { name: labelEn, label: Tên English, type: string, required: true }
+          - { name: labelVi, label: Tên Tiếng Việt, type: string, required: true }
+          - { name: url, label: Link, type: string, required: true }
+          - { name: enabled, label: Hiển thị, type: boolean }
+          - { name: newTab, label: Mở tab mới, type: boolean }
+      - name: sections
+        label: Thứ tự & bật/tắt section trang chủ
+        type: object
+        list: true
+        description: Kéo đổi thứ tự item để đổi thứ tự section. Không đổi ID.
+        fields:
+          - name: id
+            label: Section ID
+            type: select
+            options: { values: [hero, results, stats, work, case-studies, expertise, tools, manifesto, process, about, contact] }
+          - { name: enabled, label: Hiển thị section, type: boolean }
+      - name: seo
+        label: SEO & chia sẻ mạng xã hội
+        type: object
+        fields:
+          - { name: title, label: SEO title, type: string }
+          - { name: description, label: Meta description, type: text }
+          - name: socialImage
+            label: Ảnh khi chia sẻ link
+            type: image
+            options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
+
   - name: portfolio
-    label: 01. Video, số liệu, ảnh & liên hệ
+    label: 01. Portfolio — video, số liệu & ảnh
     type: file
     path: content/portfolio.json
     format: json
@@ -34,6 +142,9 @@ content:
         type: object
         list: true
         fields:
+          - { name: enabled, label: Hiển thị video, type: boolean, default: true }
+          - { name: featured, label: Video nổi bật, type: boolean, default: false }
+          - { name: order, label: Thứ tự ưu tiên, type: number }
           - { name: category, label: Chủ đề / bộ lọc, type: string, required: true }
           - { name: videoUrl, label: Link video YouTube, type: string }
           - { name: videoId, label: YouTube Video ID, type: string }
@@ -91,18 +202,6 @@ content:
               - { name: en, label: Tiếng Anh, type: text, required: true }
               - { name: vi, label: Tiếng Việt, type: text, required: true }
       - { name: tags, label: Thẻ chuyên môn ở phần Giới thiệu, type: string, list: true }
-      - name: contact
-        label: Thông tin liên hệ
-        type: object
-        description: Chỉnh ở đây sẽ tự cập nhật cả Hero và phần Liên hệ cuối trang. Không có trường số điện thoại.
-        fields:
-          - { name: github, label: Link GitHub, type: string }
-          - { name: email, label: Email công việc, type: string }
-          - { name: telegram, label: Telegram username, type: string }
-          - { name: linkedin, label: Link LinkedIn, type: string }
-          - { name: instagram, label: Link Instagram, type: string }
-          - { name: facebook, label: Link Facebook, type: string }
-          - { name: tiktok, label: Link TikTok, type: string }
 
   - name: copy
     label: 02. Toàn bộ chữ trên website
@@ -296,17 +395,20 @@ content:
     filename: "{year}-{month}-{day}-{title}.md"
     format: yaml-frontmatter
     view:
-      fields: [title, category, accent]
+      fields: [title, category, featured, published]
       primary: title
-      search: [title, category, excerpt]
+      search: [title, category, excerpt, tags]
     fields:
       - { name: layout, label: false, type: string, hidden: true, default: post }
       - { name: title, label: Tiêu đề bài viết, type: string, required: true }
+      - { name: published, label: Đã xuất bản, type: boolean, default: true }
+      - { name: featured, label: Bài nổi bật, type: boolean, default: false }
       - name: category
         label: Chủ đề
         type: string
         required: true
         description: Gõ chủ đề mới tùy ý. Website tự tạo bộ lọc mới từ chủ đề này.
+      - { name: tags, label: Tags, type: string, list: true }
       - name: accent
         label: Màu bài viết
         type: select
@@ -326,6 +428,12 @@ content:
         label: Ảnh cover
         type: image
         options: { media: blog_images, extensions: [jpg, jpeg, png, webp, gif], rename: safe }
+      - { name: seoTitle, label: SEO title riêng, type: string }
+      - { name: seoDescription, label: SEO description riêng, type: text }
+      - name: socialImage
+        label: Ảnh chia sẻ riêng
+        type: image
+        options: { media: blog_images, extensions: [jpg, jpeg, png, webp], rename: safe }
       - name: body
         label: Nội dung bài viết
         type: rich-text
@@ -338,16 +446,3 @@ content:
           extensions: [jpg, jpeg, png, webp, gif]
           rename: safe
           switcher: true
-
-  - name: site_branding
-    label: 05. Logo website & favicon
-    type: file
-    path: content/site.json
-    format: json
-    fields:
-      - name: favicon
-        label: Logo / favicon trên tab trình duyệt
-        type: image
-        description: Upload ảnh vuông PNG, JPG hoặc WEBP. Nếu xóa ảnh này, website tự quay về logo TTP mặc định.
-        options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
-      - { name: faviconAlt, label: Mô tả logo, type: string }
