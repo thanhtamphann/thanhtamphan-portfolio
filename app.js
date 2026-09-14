@@ -1,16 +1,17 @@
-(() => {
-  document.querySelectorAll('.desktop-nav,.mobile-nav').forEach((nav) => {
-    if (!nav.querySelector('a[href="blog.html"]')) {
-      const link = document.createElement('a');
-      link.href = 'blog.html';
-      link.textContent = 'Blog';
-      nav.appendChild(link);
-    }
-  });
+(async () => {
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = resolve;
+      script.onerror = resolve;
+      document.body.appendChild(script);
+    });
+  }
 
-  ['branding.js?v=20260914-1', 'motion-settings.js?v=20260914-1', 'app-base.js?v=20260914-2'].forEach((src) => {
-    const script = document.createElement('script');
-    script.src = src;
-    document.body.appendChild(script);
-  });
+  await loadScript('site-control.js?v=20260914-1');
+  if (window.siteSettingsReady) await window.siteSettingsReady;
+  await loadScript('branding.js?v=20260914-2');
+  await loadScript('motion-settings.js?v=20260914-1');
+  await loadScript('app-base.js?v=20260914-3');
 })();
