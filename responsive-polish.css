@@ -1,0 +1,110 @@
+/* Final responsive polish — keeps the existing visual identity intact. */
+
+/* Large desktop: prevent sections from feeling too stretched. */
+@media (min-width: 1280px) {
+  .section-pad { padding-left: clamp(54px, 5vw, 88px); padding-right: clamp(54px, 5vw, 88px); }
+  .hero-main, .section-heading, .project-grid, .expertise-grid, .process-list, .about-content { max-width: 1520px; width: 100%; margin-left: auto; margin-right: auto; }
+  .stats { padding-left: max(clamp(54px, 5vw, 88px), calc((100vw - 1640px) / 2)); padding-right: max(clamp(54px, 5vw, 88px), calc((100vw - 1640px) / 2)); }
+  .contact > * { max-width: 1360px; }
+}
+
+/* Tablet / compact desktop. */
+@media (max-width: 1100px) {
+  .site-header { height: 82px; }
+  .desktop-nav { gap: 20px; }
+  .hero { min-height: auto; padding-top: 54px; padding-bottom: 58px; }
+  .hero h1 { font-size: clamp(4.2rem, 10.2vw, 7.3rem); line-height: .86; }
+  .hero-bottom { margin-top: 40px; }
+  .section-heading { align-items: flex-start; }
+  .section-heading h2, .about h2 { font-size: clamp(3.2rem, 7vw, 5.6rem); }
+  .project-grid { gap: 60px 18px; }
+  .project-card h3 { font-size: clamp(1.55rem, 2.7vw, 2.1rem); }
+  .expertise-item { grid-template-columns: 60px .9fr 1.2fr; gap: 22px; }
+  .process-step { grid-template-columns: 70px .9fr 1.25fr; gap: 22px; }
+  .about { grid-template-columns: .55fr 3fr; gap: 28px; }
+}
+
+/* Mobile. */
+@media (max-width: 780px) {
+  .section-pad { padding-left: 20px; padding-right: 20px; }
+  .site-header { height: 70px; padding-left: 20px; padding-right: 16px; }
+  .header-actions { gap: 8px; }
+  .language-toggle span { min-width: 31px; padding: 6px 6px; }
+  .mobile-nav { inset: 70px 0 0; padding: 30px 20px; gap: 12px; }
+  .mobile-nav a { font-size: clamp(2.7rem, 13vw, 4.1rem); }
+
+  .hero { min-height: auto; padding-top: 30px; padding-bottom: 46px; }
+  .hero-kicker { font-size: .63rem; line-height: 1.5; }
+  .hero h1 { font-size: clamp(3.15rem, 16vw, 5.55rem); line-height: .87; letter-spacing: -.062em; }
+  .hero-bottom { display: block; margin-top: 34px; }
+  .hero-bottom p { font-size: 1rem; line-height: 1.6; }
+  .round-link { margin-top: 24px; }
+  .hero-photo-wrap { width: 100%; max-width: 100% !important; margin-top: 12px; }
+  .hero-photo { width: min(100%, 420px); margin: 0 auto; }
+  .hero-photo-note { max-width: 420px; margin-left: auto; margin-right: auto; }
+  .hero-contact { gap: 7px !important; }
+  .hero-contact a { flex: 1 1 auto; justify-content: center; min-width: 0; padding: 9px 11px !important; }
+
+  .results-intro, .case-studies, .tools, .work, .expertise, .process, .about { padding-top: 72px !important; padding-bottom: 72px !important; }
+  .section-heading { margin-bottom: 36px; }
+  .section-heading h2, .about h2 { margin-top: 13px; font-size: clamp(2.65rem, 13vw, 4.6rem); line-height: .93; letter-spacing: -.052em; }
+  .section-note { margin-top: 20px; max-width: 100%; font-size: .96rem; }
+
+  .stats { grid-template-columns: 1fr 1fr; padding-top: 24px; padding-bottom: 24px; }
+  .stat { min-height: 102px; padding: 15px 12px; }
+  .stat-value { font-size: clamp(2.3rem, 12vw, 3.6rem); }
+  .stat-label { font-size: .64rem; max-width: 130px; }
+
+  .filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; margin-right: -20px; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .filter-btn { flex: 0 0 auto; }
+  .project-grid { gap: 50px; }
+  .project-meta { align-items: flex-start; flex-direction: column; gap: 5px; margin-top: 14px; }
+  .project-card h3 { margin-top: 9px; font-size: clamp(1.55rem, 7.5vw, 2.15rem); }
+  .project-card p { font-size: .96rem; }
+  .project-performance { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 18px; }
+  .project-performance div { padding: 0 8px; }
+  .project-performance strong { font-size: clamp(1.18rem, 6vw, 1.55rem); }
+  .project-performance span { font-size: .5rem; overflow-wrap: anywhere; }
+  .view-badge { left: 10px; bottom: 10px; font-size: .61rem; }
+  .play { top: 10px; right: 10px; width: 39px; height: 39px; }
+
+  .case-grid { gap: 12px !important; }
+  .case-card { min-height: 0 !important; padding: 22px !important; }
+  .case-card h3 { margin: 28px 0 16px !important; font-size: clamp(1.65rem, 8.2vw, 2.35rem) !important; }
+
+  .expertise-item, .process-step { grid-template-columns: 38px 1fr; gap: 10px 12px; padding: 25px 0; }
+  .expertise-item h3, .process-step h3 { font-size: clamp(1.45rem, 7vw, 2rem); }
+  .expertise-item p, .process-step p { grid-column: 2; font-size: .95rem; }
+
+  .manifesto { padding-top: 78px; padding-bottom: 78px; }
+  .manifesto blockquote { margin-top: 24px; font-size: clamp(2.4rem, 12vw, 4rem); }
+
+  .about { gap: 24px; }
+  .about-index { opacity: .6; }
+  .about-content { gap: 30px; }
+  .about-portrait { max-width: min(100%, 360px); margin: 0 auto; }
+  .about-copy p { margin-top: 28px; font-size: 1rem; }
+  .about-tags { margin-top: 24px; }
+  .about-tag { padding: 8px 11px; font-size: .61rem; }
+
+  .contact { min-height: auto; padding-top: 82px; padding-bottom: 82px; }
+  .contact h2 { margin: 18px 0 24px; font-size: clamp(3rem, 14vw, 5.15rem); line-height: .91; }
+  .contact-intro { margin-bottom: 30px; font-size: 1rem; }
+  .contact-links { display: grid; grid-template-columns: 1fr; width: 100%; }
+  .contact-link { justify-content: space-between; width: 100%; padding: 14px 16px; }
+  .site-footer { padding-top: 22px; padding-bottom: 22px; gap: 8px; }
+}
+
+/* Very small phones. */
+@media (max-width: 390px) {
+  .section-pad { padding-left: 16px; padding-right: 16px; }
+  .site-header { padding-left: 16px; padding-right: 10px; }
+  .hero h1 { font-size: clamp(2.85rem, 15.7vw, 4.3rem); }
+  .stats { grid-template-columns: 1fr; }
+  .stat, .stat:nth-child(odd) { padding: 15px 0; border-left: 0; border-bottom: 1px solid var(--line); }
+  .stat:last-child { border-bottom: 0; }
+  .project-performance { grid-template-columns: 1fr; }
+  .project-performance div, .project-performance div:first-child { padding: 10px 0; border-left: 0; border-bottom: 1px solid var(--line); }
+  .project-performance div:last-child { border-bottom: 0; }
+}
