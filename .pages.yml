@@ -14,6 +14,7 @@ media:
     categories: [image]
     rename: safe
 
+
 content:
   - name: site_control
     label: 00. Website Control Center
@@ -37,6 +38,11 @@ content:
       - name: ogImage
         label: Ảnh chia sẻ mặc định
         type: image
+        options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
+      - name: profilePhoto
+        label: Ảnh cá nhân
+        type: image
+        description: Ảnh hiển thị ở đầu trang và phần giới thiệu. Nên dùng tỷ lệ 4:5.
         options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
       - name: theme
         label: Giao diện mặc định
@@ -123,6 +129,7 @@ content:
             type: image
             options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
 
+
   - name: portfolio
     label: 01. Portfolio — video, số liệu & ảnh
     type: file
@@ -202,6 +209,7 @@ content:
               - { name: en, label: Tiếng Anh, type: text, required: true }
               - { name: vi, label: Tiếng Việt, type: text, required: true }
       - { name: tags, label: Thẻ chuyên môn ở phần Giới thiệu, type: string, list: true }
+
 
   - name: copy
     label: 02. Toàn bộ chữ trên website
@@ -354,6 +362,7 @@ content:
           - { name: email, label: Nhãn Email, type: string }
           - { name: linkedin, label: Nhãn LinkedIn, type: string }
 
+
   - name: motion
     label: 03. Hiệu ứng chuyển động
     type: file
@@ -369,6 +378,7 @@ content:
       - { name: scrollReveal, label: Hiệu ứng khi cuộn trang, type: boolean }
       - { name: hoverEffects, label: Hiệu ứng khi rê chuột, type: boolean }
       - { name: statAnimation, label: Hiệu ứng số liệu, type: boolean }
+
 
   - name: cases
     label: 04. Case Studies — thêm, xóa & sắp xếp
@@ -392,6 +402,7 @@ content:
           - { name: titleVi, label: Tiêu đề — Tiếng Việt, type: text, required: true }
           - { name: bodyEn, label: Nội dung — English, type: text, required: true }
           - { name: bodyVi, label: Nội dung — Tiếng Việt, type: text, required: true }
+
 
   - name: blog
     label: 05. Blog — thêm, sửa và xóa bài
