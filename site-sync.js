@@ -6,12 +6,16 @@
     .catch(() => {});
 
 
+
+
   function waitForPortfolio(callback, tries = 0) {
     try {
       if (typeof data !== 'undefined' && data && typeof render === 'function') return callback();
     } catch (_) {}
     if (tries < 100) setTimeout(() => waitForPortfolio(callback, tries + 1), 50);
   }
+
+
 
 
   function setMeta(name, content, property = false) {
@@ -27,14 +31,21 @@
   }
 
 
+
+
   function applySEO(settings) {
     const seo = settings.seo || {};
     if (seo.title) document.title = seo.title;
     setMeta('description', seo.description || settings.siteDescription || '');
     setMeta('og:title', seo.title || settings.siteTitle || '', true);
     setMeta('og:description', seo.description || settings.siteDescription || '', true);
-    setMeta('og:image', seo.socialImage || settings.ogImage || '', true);
+    const shareImage = settings.ogImage ? new URL(settings.ogImage, window.location.origin).href : '';
+    setMeta('og:image', shareImage, true);
+    setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:image', shareImage);
   }
+
+
 
 
   function applyBrand(settings) {
@@ -49,12 +60,16 @@
   }
 
 
+
+
   function applyTheme(settings) {
     const colors = settings.colors || {};
     const map = { paper: '--paper', paperSoft: '--paper-soft', ink: '--ink', acid: '--acid', coral: '--coral', blue: '--blue' };
     Object.entries(map).forEach(([key, cssVar]) => colors[key] && document.documentElement.style.setProperty(cssVar, colors[key]));
     document.body.dataset.theme = settings.theme || 'original';
   }
+
+
 
 
   function applyChrome(settings, currentLanguage) {
@@ -69,6 +84,8 @@
     }
 
 
+
+
     document.querySelector('.site-announcement')?.remove();
     const notice = settings.announcement;
     if (notice?.enabled) {
@@ -78,6 +95,8 @@
       if (notice.url) { node.href = notice.url; if (notice.newTab) { node.target = '_blank'; node.rel = 'noreferrer'; } }
       document.body.prepend(node);
     }
+
+
 
 
     document.querySelector('.global-cta-row')?.remove();
@@ -95,6 +114,8 @@
   }
 
 
+
+
   function applySections(settings) {
     const map = { hero: '.hero', results: '#results', stats: '#stats', work: '#work', 'case-studies': '#case-studies', expertise: '#expertise', tools: '#tools', manifesto: '.manifesto', process: '#process', about: '#about', contact: '#contact' };
     const main = document.querySelector('main');
@@ -105,6 +126,8 @@
       main?.appendChild(node);
     });
   }
+
+
 
 
   function renderCases(currentLanguage) {
@@ -122,9 +145,13 @@
   }
 
 
+
+
   window.renderEditableCases = () => {
     try { renderCases(typeof language !== 'undefined' ? language : (window.siteLanguage || 'en')); } catch (_) {}
   };
+
+
 
 
   function applyProfilePhoto(settings) {
@@ -140,6 +167,8 @@
       container.classList.add('has-image');
     });
   }
+
+
 
 
   function syncPortfolio() {
@@ -164,12 +193,16 @@
   }
 
 
+
+
   window.refreshSiteChrome = function(nextLanguage) {
     const settings = window.siteSettings || {};
     applyChrome(settings, nextLanguage || language || 'en');
     applyProfilePhoto(settings);
     renderCases(nextLanguage || language || 'en');
   };
+
+
 
 
   Promise.resolve(window.siteSettingsReady).finally(() => waitForPortfolio(syncPortfolio));
