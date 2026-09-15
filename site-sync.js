@@ -5,12 +5,14 @@
     .then(payload => { editableCases = payload.items || []; if (window.renderEditableCases) window.renderEditableCases(); })
     .catch(() => {});
 
+
   function waitForPortfolio(callback, tries = 0) {
     try {
       if (typeof data !== 'undefined' && data && typeof render === 'function') return callback();
     } catch (_) {}
     if (tries < 100) setTimeout(() => waitForPortfolio(callback, tries + 1), 50);
   }
+
 
   function setMeta(name, content, property = false) {
     if (!content) return;
@@ -24,6 +26,7 @@
     node.setAttribute('content', content);
   }
 
+
   function applySEO(settings) {
     const seo = settings.seo || {};
     if (seo.title) document.title = seo.title;
@@ -32,6 +35,7 @@
     setMeta('og:description', seo.description || settings.siteDescription || '', true);
     setMeta('og:image', seo.socialImage || settings.ogImage || '', true);
   }
+
 
   function applyBrand(settings) {
     const logo = (settings.logoText || 'TTP').trim() || 'TTP';
@@ -44,12 +48,14 @@
     if (footer && settings.siteTitle) footer.textContent = `© ${new Date().getFullYear()} ${settings.siteTitle}`;
   }
 
+
   function applyTheme(settings) {
     const colors = settings.colors || {};
     const map = { paper: '--paper', paperSoft: '--paper-soft', ink: '--ink', acid: '--acid', coral: '--coral', blue: '--blue' };
     Object.entries(map).forEach(([key, cssVar]) => colors[key] && document.documentElement.style.setProperty(cssVar, colors[key]));
     document.body.dataset.theme = settings.theme || 'original';
   }
+
 
   function applyChrome(settings, currentLanguage) {
     const lang = currentLanguage || 'en';
@@ -62,6 +68,7 @@
       document.querySelectorAll('.desktop-nav,.mobile-nav').forEach(nav => nav.innerHTML = navHtml);
     }
 
+
     document.querySelector('.site-announcement')?.remove();
     const notice = settings.announcement;
     if (notice?.enabled) {
@@ -71,6 +78,7 @@
       if (notice.url) { node.href = notice.url; if (notice.newTab) { node.target = '_blank'; node.rel = 'noreferrer'; } }
       document.body.prepend(node);
     }
+
 
     document.querySelector('.global-cta-row')?.remove();
     const cta = settings.cta || {};
@@ -86,6 +94,7 @@
     }
   }
 
+
   function applySections(settings) {
     const map = { hero: '.hero', results: '#results', stats: '#stats', work: '#work', 'case-studies': '#case-studies', expertise: '#expertise', tools: '#tools', manifesto: '.manifesto', process: '#process', about: '#about', contact: '#contact' };
     const main = document.querySelector('main');
@@ -96,6 +105,7 @@
       main?.appendChild(node);
     });
   }
+
 
   function renderCases(currentLanguage) {
     if (!editableCases.length) return;
@@ -111,13 +121,31 @@
       </article>`).join('');
   }
 
+
   window.renderEditableCases = () => {
     try { renderCases(typeof language !== 'undefined' ? language : (window.siteLanguage || 'en')); } catch (_) {}
   };
 
+
+  function applyProfilePhoto(settings) {
+    const source = settings.profilePhoto || data.profile?.image;
+    if (!source) return;
+    document.querySelectorAll('.hero-photo, .about-portrait').forEach((container, index) => {
+      const image = document.createElement('img');
+      image.src = source;
+      image.alt = data.profile?.alt || settings.siteTitle || 'Portrait';
+      image.loading = index === 0 ? 'eager' : 'lazy';
+      image.decoding = 'async';
+      container.replaceChildren(image);
+      container.classList.add('has-image');
+    });
+  }
+
+
   function syncPortfolio() {
     const settings = window.siteSettings || {};
     if (settings.contact) data.contact = { ...(data.contact || {}), ...settings.contact };
+    if (settings.profilePhoto) data.profile = { ...(data.profile || {}), image: settings.profilePhoto };
     if (Array.isArray(data.projects)) {
       data.projects = data.projects.filter(project => project.enabled !== false).sort((a, b) => {
         const featured = Number(Boolean(b.featured)) - Number(Boolean(a.featured));
@@ -126,22 +154,25 @@
     }
     if (window.siteLanguage && (window.siteLanguage === 'en' || window.siteLanguage === 'vi')) language = window.siteLanguage;
     render();
-    applyTheme(settings);
     applySEO(settings);
     applyBrand(settings);
+    applyTheme(settings);
     applyChrome(settings, language);
     applySections(settings);
+    applyProfilePhoto(settings);
     renderCases(language);
   }
 
+
   window.refreshSiteChrome = function(nextLanguage) {
     const settings = window.siteSettings || {};
-    const lang = nextLanguage || language || 'en';
-    applyChrome(settings, lang);
-    renderCases(lang);
+    applyChrome(settings, nextLanguage || language || 'en');
+    applyProfilePhoto(settings);
+    renderCases(nextLanguage || language || 'en');
   };
 
-  waitForPortfolio(syncPortfolio);
+
+  Promise.resolve(window.siteSettingsReady).finally(() => waitForPortfolio(syncPortfolio));
   document.querySelector('.language-toggle')?.addEventListener('click', () => setTimeout(() => {
     try { window.siteLanguage = language; window.refreshSiteChrome(language); } catch (_) {}
   }, 0));
