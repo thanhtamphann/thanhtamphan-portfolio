@@ -17,6 +17,10 @@ media:
 
 
 
+
+
+
+
 content:
   - name: site_control
     label: 00. Website Control Center
@@ -24,7 +28,7 @@ content:
     path: _data/site.json
     format: json
     fields:
-      - { name: siteTitle, label: Tên website, type: string, required: true }
+      - { name: siteTitle, label: Tên website & tên ở trang đầu, type: string, required: true }
       - { name: siteTagline, label: Tagline / vai trò, type: string }
       - { name: siteDescription, label: Mô tả website, type: text }
       - name: defaultLanguage
@@ -130,6 +134,10 @@ content:
 
 
 
+
+
+
+
   - name: portfolio
     label: 01. Portfolio — video, số liệu & ảnh
     type: file
@@ -209,6 +217,10 @@ content:
               - { name: en, label: Tiếng Anh, type: text, required: true }
               - { name: vi, label: Tiếng Việt, type: text, required: true }
       - { name: tags, label: Thẻ chuyên môn ở phần Giới thiệu, type: string, list: true }
+
+
+
+
 
 
 
@@ -367,6 +379,10 @@ content:
 
 
 
+
+
+
+
   - name: motion
     label: 03. Hiệu ứng chuyển động
     type: file
@@ -382,6 +398,10 @@ content:
       - { name: scrollReveal, label: Hiệu ứng khi cuộn trang, type: boolean }
       - { name: hoverEffects, label: Hiệu ứng khi rê chuột, type: boolean }
       - { name: statAnimation, label: Hiệu ứng số liệu, type: boolean }
+
+
+
+
 
 
 
@@ -408,6 +428,10 @@ content:
           - { name: titleVi, label: Tiêu đề — Tiếng Việt, type: text, required: true }
           - { name: bodyEn, label: Nội dung — English, type: text, required: true }
           - { name: bodyVi, label: Nội dung — Tiếng Việt, type: text, required: true }
+
+
+
+
 
 
 
