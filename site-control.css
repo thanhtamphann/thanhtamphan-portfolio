@@ -5,3 +5,4 @@
 body[data-theme='dark']{--paper:#11110f;--paper-soft:#1a1a18;--ink:#f0eee8;--muted:#aaa79f;--line:rgba(240,238,232,.18)}
 body[data-theme='minimal'] .grain{display:none}body[data-theme='minimal'] .project-card,body[data-theme='minimal'] .case-card{box-shadow:none!important}
 @media(max-width:780px){.global-cta-row{width:100%}.global-cta{flex:1 1 160px}.site-announcement{font-size:.61rem}}
+.hero-photo img,.about-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}.hero-photo.has-image,.about-portrait.has-image{overflow:hidden}
