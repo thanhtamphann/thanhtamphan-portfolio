@@ -15,6 +15,8 @@ media:
     rename: safe
 
 
+
+
 content:
   - name: site_control
     label: 00. Website Control Center
@@ -36,7 +38,7 @@ content:
         description: Nếu để trống, website dùng favicon TTP mặc định.
         options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
       - name: ogImage
-        label: Ảnh chia sẻ mặc định
+        label: Ảnh khi chia sẻ link
         type: image
         options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
       - name: profilePhoto
@@ -124,10 +126,8 @@ content:
         fields:
           - { name: title, label: SEO title, type: string }
           - { name: description, label: Meta description, type: text }
-          - name: socialImage
-            label: Ảnh khi chia sẻ link
-            type: image
-            options: { media: portfolio_images, extensions: [jpg, jpeg, png, webp], rename: safe }
+
+
 
 
   - name: portfolio
@@ -209,6 +209,8 @@ content:
               - { name: en, label: Tiếng Anh, type: text, required: true }
               - { name: vi, label: Tiếng Việt, type: text, required: true }
       - { name: tags, label: Thẻ chuyên môn ở phần Giới thiệu, type: string, list: true }
+
+
 
 
   - name: copy
@@ -363,6 +365,8 @@ content:
           - { name: linkedin, label: Nhãn LinkedIn, type: string }
 
 
+
+
   - name: motion
     label: 03. Hiệu ứng chuyển động
     type: file
@@ -378,6 +382,8 @@ content:
       - { name: scrollReveal, label: Hiệu ứng khi cuộn trang, type: boolean }
       - { name: hoverEffects, label: Hiệu ứng khi rê chuột, type: boolean }
       - { name: statAnimation, label: Hiệu ứng số liệu, type: boolean }
+
+
 
 
   - name: cases
@@ -402,6 +408,8 @@ content:
           - { name: titleVi, label: Tiêu đề — Tiếng Việt, type: text, required: true }
           - { name: bodyEn, label: Nội dung — English, type: text, required: true }
           - { name: bodyVi, label: Nội dung — Tiếng Việt, type: text, required: true }
+
+
 
 
   - name: blog
