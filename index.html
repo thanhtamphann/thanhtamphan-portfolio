@@ -1,3 +1,6 @@
+---
+---
+{% assign share_image = site.data.site.ogImage %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,7 +11,10 @@
     <meta property="og:title" content="Thanh Tam Phan — Content Strategist & YouTube Scriptwriter" />
     <meta property="og:description" content="Research-led strategy. Clear ideas. Stories people finish." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://i.ytimg.com/vi/49_Ph2q6uIM/maxresdefault.jpg" />
+    <meta property="og:image" content="{{ site.url }}{{ share_image }}" />
+    <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="{{ site.url }}{{ share_image }}" />
     <meta name="portfolio-version" content="2026-09-14-live-8" />
     <title>Thanh Tam Phan — Content Strategist & YouTube Scriptwriter</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311110f'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Georgia' font-size='23' font-weight='700' fill='%23f0eee8'%3ETTP%3C/text%3E%3Ccircle cx='50' cy='14' r='5' fill='%23c9ff3d'/%3E%3C/svg%3E" />
